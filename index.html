@@ -1,827 +1,198 @@
-index_html = """<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plan de Ejecución de Comandos NVIH</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Plan de Ejecución Comandos NVIH - Completo</title>
+    <style>
+      *{margin:0;padding:0;box-sizing:border-box}
+      body{font-family:Segoe UI,Roboto,Arial,sans-serif;line-height:1.6;color:#333;background:#f5f5f5;padding:20px}
+      .container{max-width:1400px;margin:0 auto;background:#fff;padding:30px;border-radius:10px;box-shadow:0 0 20px rgba(0,0,0,.1)}
+      h1{color:#2c3e50;text-align:center;margin-bottom:10px;font-size:2.5em;border-bottom:4px solid #3498db;padding-bottom:15px}
+      .subtitle{text-align:center;color:#7f8c8d;margin-bottom:30px;font-size:1.05em}
+      .fase{margin:30px 0;border-left:5px solid #3498db;padding-left:20px}
+      .fase h2{color:#2c3e50;margin-bottom:15px;font-size:1.6em}
+      .fase-critica{border-left-color:#e74c3c}.fase-importante{border-left-color:#f39c12}.fase-media{border-left-color:#3498db}.fase-opcional{border-left-color:#95a5a6}
+      table{width:100%;border-collapse:collapse;margin:20px 0;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.06)}
+      thead{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff}
+      th{padding:14px;text-align:left;font-weight:600;font-size:.95em;text-transform:uppercase;letter-spacing:.3px}
+      td{padding:12px 14px;border-bottom:1px solid #ecf0f1}
+      tbody tr:hover{background:#f8f9fa;transition:.2s}
+      .badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:.85em;font-weight:600;min-width:80px;text-align:center}
+      .badge-si{background:#27ae60;color:#fff}.badge-no{background:#e74c3c;color:#fff}.badge-cuidado{background:#f39c12;color:#fff}.badge-depende{background:#3498db;color:#fff}.badge-manual{background:#95a5a6;color:#fff}
+      .prioridad{font-weight:700;padding:5px 10px;border-radius:5px;display:inline-block}
+      .prioridad-critica{background:#ffebee;color:#c62828}.prioridad-alta{background:#fff3e0;color:#e65100}.prioridad-media{background:#e3f2fd;color:#1565c0}.prioridad-baja{background:#f3e5f5;color:#6a1b9a}
+      .comando{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#2c3e50;color:#2ecc71;padding:3px 8px;border-radius:4px;font-size:.9em;font-weight:600}
+      .resumen{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:22px;border-radius:10px;margin:30px 0}
+      .resumen h3{margin-bottom:10px;font-size:1.3em}
+      .warning-box{background:#fff3cd;border-left:5px solid #ffc107;padding:16px;margin:20px 0;border-radius:6px}
+      .warning-box h4{color:#856404;margin-bottom:8px;font-size:1.05em}
+      .script-box{background:#2c3e50;color:#2ecc71;padding:16px;border-radius:8px;margin:20px 0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;overflow:auto;max-height:500px}
+      .numero-orden{background:#667eea;color:#fff;border-radius:50%;width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;font-weight:bold;font-size:.85em}
+      .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:20px 0}
+      .stat-card{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:16px;border-radius:10px;text-align:center}
+      .stat-card h3{font-size:2.1em;margin-bottom:4px}
+      .note{font-size:.9em;color:#64748b}
+      @media print{body{background:#fff;padding:0}.container{box-shadow:none;padding:20px}.script-box{max-height:none}}
+    </style>
+  </head>
+  <body>
     <div class="container">
-        <header>
-            <h1>📋 Plan de Ejecución de Comandos NVIH</h1>
-            <p class="subtitle">Sistema de Gestión de Pacientes - Base de Datos</p>
-        </header>
+      <h1>📋 Plan de Ejecución Comandos NVIH</h1>
+      <p class="subtitle">Guía completa y ordenada para la corrección de datos del sistema</p>
 
-        <!-- TABLA RESUMEN -->
-        <section class="summary-section">
-            <h2>📊 Tabla Resumen de Comandos</h2>
-            <div class="table-container">
-                <table class="summary-table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Comando</th>
-                            <th>Fase</th>
-                            <th>Prioridad</th>
-                            <th>Impacto</th>
-                            <th>Requiere Backup</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>validate_check_de_fallecido</td>
-                            <td>Fase 1</td>
-                            <td><span class="badge critical">CRÍTICO</span></td>
-                            <td>Alto</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>set_paciente_sinadef</td>
-                            <td>Fase 1</td>
-                            <td><span class="badge critical">CRÍTICO</span></td>
-                            <td>Alto</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>eliminar_fechas_abandono_en_fallecidos</td>
-                            <td>Fase 1</td>
-                            <td><span class="badge critical">CRÍTICO</span></td>
-                            <td>Alto</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>diagnostico_vih_pacientes</td>
-                            <td>Fase 2</td>
-                            <td><span class="badge high">ALTA</span></td>
-                            <td>Alto</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>validar_diagnosticos</td>
-                            <td>Fase 2</td>
-                            <td><span class="badge high">ALTA</span></td>
-                            <td>Medio</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>migrar_enfermedades_a_pacienteenfermedad</td>
-                            <td>Fase 2</td>
-                            <td><span class="badge high">ALTA</span></td>
-                            <td>Alto</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>migra_enfermedad_to_tarenfermedad</td>
-                            <td>Fase 2</td>
-                            <td><span class="badge high">ALTA</span></td>
-                            <td>Alto</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td>migracion_nvih_a_intermediario_vih_tb</td>
-                            <td>Fase 2</td>
-                            <td><span class="badge high">ALTA</span></td>
-                            <td>Medio</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td>set_establecimiento_inicial</td>
-                            <td>Fase 3</td>
-                            <td><span class="badge medium">MEDIA</span></td>
-                            <td>Medio</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td>actualiza_eess_origen</td>
-                            <td>Fase 3</td>
-                            <td><span class="badge medium">MEDIA</span></td>
-                            <td>Medio</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>11</td>
-                            <td>cambiar_establecimiento</td>
-                            <td>Fase 3</td>
-                            <td><span class="badge medium">MEDIA</span></td>
-                            <td>Alto</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>12</td>
-                            <td>actualizar_condicion_eess_pacientes</td>
-                            <td>Fase 3</td>
-                            <td><span class="badge medium">MEDIA</span></td>
-                            <td>Medio</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>13</td>
-                            <td>fix_fecha_esquema_inicial</td>
-                            <td>Fase 4</td>
-                            <td><span class="badge medium">MEDIA</span></td>
-                            <td>Medio</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>14</td>
-                            <td>registra_cambio_esquema_tratamiento</td>
-                            <td>Fase 4</td>
-                            <td><span class="badge medium">MEDIA</span></td>
-                            <td>Alto</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>15</td>
-                            <td>actualiza_condicion_tar</td>
-                            <td>Fase 4</td>
-                            <td><span class="badge medium">MEDIA</span></td>
-                            <td>Alto</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>16</td>
-                            <td>first_record_tar_to_new</td>
-                            <td>Fase 4</td>
-                            <td><span class="badge medium">MEDIA</span></td>
-                            <td>Alto</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>17</td>
-                            <td>actualizar_nuevo_continuador</td>
-                            <td>Fase 4</td>
-                            <td><span class="badge medium">MEDIA</span></td>
-                            <td>Alto</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>18</td>
-                            <td>update_paciente_continuador_si</td>
-                            <td>Fase 4</td>
-                            <td><span class="badge medium">MEDIA</span></td>
-                            <td>Medio</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>19</td>
-                            <td>update_tipo_poblacion</td>
-                            <td>Fase 5</td>
-                            <td><span class="badge low">BAJA</span></td>
-                            <td>Bajo</td>
-                            <td>⚠️ Recomendado</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>20</td>
-                            <td>actualizar_enfermedad_segun_bd_intermediario</td>
-                            <td>Fase 5</td>
-                            <td><span class="badge low">BAJA</span></td>
-                            <td>Bajo</td>
-                            <td>⚠️ Recomendado</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>21</td>
-                            <td>generar_derivaciones_tar</td>
-                            <td>Fase 6</td>
-                            <td><span class="badge low">BAJA</span></td>
-                            <td>Medio</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>22</td>
-                            <td>actualiza_derivacion_efectiva</td>
-                            <td>Fase 6</td>
-                            <td><span class="badge low">BAJA</span></td>
-                            <td>Medio</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>23</td>
-                            <td>actualiza_derivacion_essalud</td>
-                            <td>Fase 6</td>
-                            <td><span class="badge low">BAJA</span></td>
-                            <td>Medio</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>24</td>
-                            <td>actualiza_derivacion_internacional</td>
-                            <td>Fase 6</td>
-                            <td><span class="badge low">BAJA</span></td>
-                            <td>Medio</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>25</td>
-                            <td>derivaciones_masivas</td>
-                            <td>Fase 6</td>
-                            <td><span class="badge caution">PRECAUCIÓN</span></td>
-                            <td>Muy Alto</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>26</td>
-                            <td>consulta_netlab_pacientes</td>
-                            <td>Fase 7</td>
-                            <td><span class="badge info">CONSULTA</span></td>
-                            <td>Ninguno</td>
-                            <td>❌ No</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>27</td>
-                            <td>automatic_abandonment_patient</td>
-                            <td>Manual</td>
-                            <td><span class="badge caution">PRECAUCIÓN</span></td>
-                            <td>Muy Alto</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                        <tr>
-                            <td>28</td>
-                            <td>eliminar_paciente</td>
-                            <td>Manual</td>
-                            <td><span class="badge danger">PELIGRO</span></td>
-                            <td>Crítico</td>
-                            <td>✅ Sí</td>
-                            <td><input type="checkbox" class="status-check"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+      <div class="stats">
+        <div class="stat-card"><h3>23</h3><p>Comandos Totales</p></div>
+        <div class="stat-card"><h3>15</h3><p>Obligatorios</p></div>
+        <div class="stat-card"><h3>5</h3><p>Opcionales</p></div>
+        <div class="stat-card"><h3>3</h3><p>Solo Manuales</p></div>
+      </div>
 
-        <!-- ESTADÍSTICAS -->
-        <section class="stats-section">
-            <div class="stat-card">
-                <h3>28</h3>
-                <p>Total Comandos</p>
-            </div>
-            <div class="stat-card critical">
-                <h3>3</h3>
-                <p>Críticos</p>
-            </div>
-            <div class="stat-card high">
-                <h3>5</h3>
-                <p>Alta Prioridad</p>
-            </div>
-            <div class="stat-card medium">
-                <h3>10</h3>
-                <p>Media Prioridad</p>
-            </div>
-        </section>
+      <h2 style="color:#2c3e50;margin-top:26px;margin-bottom:10px;">📊 Tabla Completa de Comandos</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:6%">#</th>
+            <th style="width:22%">Comando</th>
+            <th style="width:34%">Función</th>
+            <th style="width:14%">Alcance</th>
+            <th style="width:10%">¿Ejecutar?</th>
+            <th style="width:14%">Prioridad / Fase</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="numero-orden">1</span></td><td><span class="comando">fix_fecha_esquema_inicial</span></td><td>Corrige fecha_esquema_tratamiento del primer TAR si es NULL</td><td>Pacientes con TAR</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-critica">Crítica · F1</span></td></tr>
+          <tr><td><span class="numero-orden">2</span></td><td><span class="comando">set_establecimiento_inicial</span></td><td>Asigna establecimiento_salud_inicial según primer TAR</td><td>Sin EESS inicial</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-critica">Crítica · F1</span></td></tr>
+          <tr><td><span class="numero-orden">3</span></td><td><span class="comando">actualiza_condicion_tar</span></td><td>Corrige tipo_condicion (Nuevo/Continuador) en TAR</td><td>Todos los TAR</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-critica">Crítica · F1</span></td></tr>
+          <tr><td><span class="numero-orden">4</span></td><td><span class="comando">update_paciente_continuador_si</span></td><td>Sincroniza paciente_continuador según primer TAR</td><td>Con TAR</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-critica">Crítica · F1</span></td></tr>
+          <tr><td><span class="numero-orden">5</span></td><td><span class="comando">migra_enfermedad_to_tarenfermedad</span></td><td>Migra enfermedades de paciente_enfermedad a TAR</td><td>Enfermedades sin migrar</td><td><span class="badge badge-depende">DEPENDE</span></td><td><span class="prioridad prioridad-media">Media · F1</span></td></tr>
+          <tr><td><span class="numero-orden">6</span></td><td><span class="comando">actualiza_eess_origen</span></td><td>Actualiza eess_origen desde primer TAR</td><td>Con TAR</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-alta">Alta · F2</span></td></tr>
+          <tr><td><span class="numero-orden">7</span></td><td><span class="comando">generar_derivaciones_tar</span></td><td>Genera derivaciones por cambios de EESS</td><td>Multi-EESS</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-alta">Alta · F3</span></td></tr>
+          <tr><td><span class="numero-orden">8</span></td><td><span class="comando">actualiza_derivacion_efectiva</span></td><td>Marca derivaciones como efectivas si hay TAR destino</td><td>Todas</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-alta">Alta · F3</span></td></tr>
+          <tr><td><span class="numero-orden">9</span></td><td><span class="comando">actualiza_derivacion_essalud</span></td><td>Asume efectivas derivaciones a ESSALUD</td><td>ESSALUD</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-alta">Alta · F3</span></td></tr>
+          <tr><td><span class="numero-orden">10</span></td><td><span class="comando">actualiza_derivacion_internacional</span></td><td>Marca efectivas derivaciones internacionales</td><td>Internacional</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-alta">Alta · F3</span></td></tr>
+          <tr><td><span class="numero-orden">11</span></td><td><span class="comando">actualizar_condicion_eess_pacientes</span></td><td>Sincroniza condición y EESS actual según último TAR/derivación</td><td>Todos</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-critica">Crítica · F4</span></td></tr>
+          <tr><td><span class="numero-orden">12</span></td><td><span class="comando">eliminar_fechas_abandono_en_fallecidos</span></td><td>Elimina fechas de abandono posteriores al fallecimiento</td><td>Fallecidos</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-media">Media · F5</span></td></tr>
+          <tr><td><span class="numero-orden">13</span></td><td><span class="comando">validate_check_de_fallecido</span></td><td>Pone es_fallecido=False cuando no hay fecha_defuncion (corrige checks marcados por error)</td><td>Pacientes con es_fallecido=True y fecha_defuncion NULL</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-media">Media · F5</span></td></tr>
+          <tr><td><span class="numero-orden">14</span></td><td><span class="comando">set_paciente_sinadef</span></td><td>Consulta SINADEF y actualiza fallecimientos</td><td>Pacientes (mejor en lotes)</td><td><span class="badge badge-cuidado">⚠ CUIDADO</span></td><td><span class="prioridad prioridad-media">Media · F5</span></td></tr>
+          <tr><td><span class="numero-orden">15</span></td><td><span class="comando">automatic_abandonment_patient</span></td><td>Marca abandono por criterios de inactividad</td><td>Sin atención reciente</td><td><span class="badge badge-cuidado">⚠ CUIDADO</span></td><td><span class="prioridad prioridad-media">Media · F5</span></td></tr>
+          <tr><td><span class="numero-orden">16</span></td><td><span class="comando">registra_cambio_esquema_tratamiento</span></td><td>Historial de cambios de esquema</td><td>Con 2+ TAR</td><td><span class="badge badge-depende">DEPENDE</span></td><td><span class="prioridad prioridad-baja">Baja · F6</span></td></tr>
+          <tr><td><span class="numero-orden">17</span></td><td><span class="comando">update_tipo_poblacion</span></td><td>Fija tipo_poblacion="General" para menores de 12</td><td>≤ 12 años</td><td><span class="badge badge-depende">DEPENDE</span></td><td><span class="prioridad prioridad-baja">Baja · F6</span></td></tr>
+          <tr><td><span class="numero-orden">18</span></td><td><span class="comando">validar_diagnosticos</span></td><td>Elimina diagnósticos con fecha incorrecta</td><td>Diagnósticos inconsistentes</td><td><span class="badge badge-depende">DEPENDE</span></td><td><span class="prioridad prioridad-baja">Baja · F6</span></td></tr>
+          <tr><td><span class="numero-orden">19</span></td><td><span class="comando">diagnostico_vih_pacientes</span></td><td>Genera diagnósticos VIH desde servicio externo</td><td>Pacientes sin diagnóstico</td><td><span class="badge badge-depende">DEPENDE</span></td><td><span class="prioridad prioridad-baja">Baja · F6</span></td></tr>
+          <tr><td><span class="numero-orden">20</span></td><td><span class="comando">migrar_enfermedades_a_pacienteenfermedad</span></td><td>Migra enfermedades desde tabla TAR a paciente</td><td>Cuando cambia el modelo</td><td><span class="badge badge-depende">DEPENDE</span></td><td><span class="prioridad prioridad-baja">Baja · F6</span></td></tr>
+          <tr><td><span class="numero-orden">21</span></td><td><span class="comando">consulta_netlab_pacientes</span></td><td>Actualiza resultados de NetLab</td><td>Por EESS/lotes</td><td><span class="badge badge-depende">DEPENDE</span></td><td><span class="prioridad prioridad-baja">Baja · F6</span></td></tr>
+          <tr><td><span class="numero-orden">22</span></td><td><span class="comando">migracion_nvih_a_intermediario_vih_tb</span></td><td>Exporta datos a BD intermediaria VIH-TB</td><td>Para reportes TB</td><td><span class="badge badge-depende">DEPENDE</span></td><td><span class="prioridad prioridad-baja">Baja · F6</span></td></tr>
+          <tr><td><span class="numero-orden">23</span></td><td><span class="comando">actualizar_enfermedad_segun_bd_intermediario</span></td><td>Sincroniza enfermedades desde BD intermediaria</td><td>Enfermedades externas</td><td><span class="badge badge-depende">DEPENDE</span></td><td><span class="prioridad prioridad-baja">Baja · F6</span></td></tr>
+          <tr><td>-</td><td><span class="comando">cambiar_establecimiento</span></td><td>Migrar pacientes de un EESS a otro (casos puntuales)</td><td>Pacientes específicos</td><td><span class="badge badge-manual">MANUAL</span></td><td><span class="prioridad prioridad-baja">Manual</span></td></tr>
+          <tr><td>-</td><td><span class="comando">derivaciones_masivas</span></td><td>Crea derivaciones para una lista</td><td>Lista específica</td><td><span class="badge badge-manual">MANUAL</span></td><td><span class="prioridad prioridad-baja">Manual</span></td></tr>
+          <tr><td>-</td><td><span class="comando">eliminar_paciente</span></td><td>Elimina pacientes por documento</td><td>Pacientes específicos</td><td><span class="badge badge-manual">MANUAL</span></td><td><span class="prioridad prioridad-baja">Manual</span></td></tr>
+        </tbody>
+      </table>
 
-        <!-- PRE-EJECUCIÓN -->
-        <section class="checklist-section">
-            <h2>✅ Checklist Pre-Ejecución</h2>
-            <div class="checklist">
-                <label><input type="checkbox"> Backup completo de la base de datos realizado</label>
-                <label><input type="checkbox"> Entorno de prueba validado</label>
-                <label><input type="checkbox"> Permisos de base de datos verificados</label>
-                <label><input type="checkbox"> Equipo técnico notificado</label>
-                <label><input type="checkbox"> Plan de rollback preparado</label>
-                <label><input type="checkbox"> Ventana de mantenimiento programada</label>
-            </div>
-        </section>
+      <div id="fase5" class="fase fase-media">
+        <h2>🟣 FASE 5: Condiciones Especiales (Importante)</h2>
+        <table>
+          <thead><tr><th>Orden</th><th>Comando</th><th>Descripción</th><th>Comando de Ejecución</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="numero-orden">12</span></td>
+              <td><span class="comando">eliminar_fechas_abandono_en_fallecidos</span></td>
+              <td>Elimina fecha de abandono cuando es posterior a la fecha de fallecimiento.</td>
+              <td><code>python manage.py eliminar_fechas_abandono_en_fallecidos</code></td>
+            </tr>
+            <tr>
+              <td><span class="numero-orden">13</span></td>
+              <td><span class="comando">validate_check_de_fallecido</span></td>
+              <td>
+                Establece <code>es_fallecido=False</code> en <code>paciente_paciente</code> cuando <code>fecha_defuncion</code> es NULL. 
+                Basado en tu script: hace un <code>bulk_update</code> y loguea en <code>static/validate_check_de_fallecido_log.txt</code>.
+              </td>
+              <td><code>python manage.py validate_check_de_fallecido</code></td>
+            </tr>
+            <tr>
+              <td><span class="numero-orden">14</span></td>
+              <td><span class="comando">set_paciente_sinadef</span></td>
+              <td>Consulta SINADEF para actualizar fallecidos. Recomendado en lotes.</td>
+              <td>
+                <code>python manage.py set_paciente_sinadef --solo_abandono=1 --cantidad=1000</code><br/>
+                o<br/>
+                <code>python manage.py set_paciente_sinadef --cantidad=1000</code>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="numero-orden">15</span></td>
+              <td><span class="comando">automatic_abandonment_patient</span></td>
+              <td>Marca abandonos automáticos por inactividad (revisar lógica).</td>
+              <td><code>python manage.py automatic_abandonment_patient</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-        <!-- FASES DE EJECUCIÓN -->
-        <section class="phases-section">
-            <h2>🔄 Fases de Ejecución Detalladas</h2>
-            
-            <!-- FASE 1 -->
-            <div class="phase-card">
-                <div class="phase-header phase-1">
-                    <h3>FASE 1: Corrección de Datos Críticos de Fallecidos</h3>
-                    <span class="badge critical">CRÍTICO</span>
-                </div>
-                
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>1. validate_check_de_fallecido</h4>
-                        <span class="badge critical">CRÍTICO</span>
-                    </div>
-                    <p class="description">Valida y corrige inconsistencias en registros de pacientes fallecidos, asegurando que la condición de fallecido esté correctamente marcada.</p>
-                    <div class="command-code">
-                        <code>python manage.py validate_check_de_fallecido</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Alto - Corrige datos críticos de estado vital</p>
-                        <p><strong>Precaución:</strong> Verificar logs de cambios realizados</p>
-                    </div>
-                </div>
+      <div class="warning-box">
+        <h4>⚠️ Advertencias</h4>
+        <ul>
+          <li>Backup obligatorio de la BD antes de ejecutar.</li>
+          <li>Primero en ambiente de prueba o con lotes pequeños.</li>
+          <li>Monitorea archivos de log en la carpeta <code>static/</code>.</li>
+        </ul>
+      </div>
 
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>2. set_paciente_sinadef</h4>
-                        <span class="badge critical">CRÍTICO</span>
-                    </div>
-                    <p class="description">Marca pacientes como fallecidos según datos del SINADEF (Sistema Nacional de Defunciones).</p>
-                    <div class="command-code">
-                        <code>python manage.py set_paciente_sinadef</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Alto - Actualiza estado vital desde fuente oficial</p>
-                        <p><strong>Precaución:</strong> Requiere conexión con SINADEF actualizada</p>
-                    </div>
-                </div>
+      <h2 style="color:#2c3e50;margin-top:26px;margin-bottom:10px;">🚀 Script de Ejecución Completo</h2>
+      <div class="script-box"><pre>#!/bin/bash
+set -e
 
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>3. eliminar_fechas_abandono_en_fallecidos</h4>
-                        <span class="badge critical">CRÍTICO</span>
-                    </div>
-                    <p class="description">Elimina fechas de abandono en pacientes fallecidos (inconsistencia lógica).</p>
-                    <div class="command-code">
-                        <code>python manage.py eliminar_fechas_abandono_en_fallecidos</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Alto - Limpia datos inconsistentes</p>
-                        <p><strong>Precaución:</strong> Revisar registros afectados</p>
-                    </div>
-                </div>
-            </div>
+echo "==== SCRIPT ORDENAMIENTO NVIH ===="
+echo "Inicio: $(date)"
 
-            <!-- FASE 2 -->
-            <div class="phase-card">
-                <div class="phase-header phase-2">
-                    <h3>FASE 2: Diagnósticos y Enfermedades</h3>
-                    <span class="badge high">ALTA</span>
-                </div>
-                
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>4. diagnostico_vih_pacientes</h4>
-                        <span class="badge high">ALTA</span>
-                    </div>
-                    <p class="description">Actualiza o corrige diagnósticos de VIH en pacientes.</p>
-                    <div class="command-code">
-                        <code>python manage.py diagnostico_vih_pacientes</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Alto - Afecta diagnósticos principales</p>
-                        <p><strong>Precaución:</strong> Validar criterios diagnósticos</p>
-                    </div>
-                </div>
+# FASE 1
+python manage.py fix_fecha_esquema_inicial
+python manage.py set_establecimiento_inicial
+# Lotes para tipo_condicion
+while true; do
+  python manage.py actualiza_condicion_tar --cantidad=5000
+  read -p "¿Otro lote de actualiza_condicion_tar? (s/n): " c; [ "$c" = "s" ] || break
+done
+python manage.py update_paciente_continuador_si
+read -p "¿Migrar enfermedades a TAR? (s/n): " m; [ "$m" = "s" ] && python manage.py migra_enfermedad_to_tarenfermedad
 
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>5. validar_diagnosticos</h4>
-                        <span class="badge high">ALTA</span>
-                    </div>
-                    <p class="description">Valida la consistencia de diagnósticos registrados.</p>
-                    <div class="command-code">
-                        <code>python manage.py validar_diagnosticos</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Medio - Identifica inconsistencias</p>
-                        <p><strong>Precaución:</strong> Revisar reporte de validación</p>
-                    </div>
-                </div>
+# FASE 2
+python manage.py actualiza_eess_origen
 
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>6. migrar_enfermedades_a_pacienteenfermedad</h4>
-                        <span class="badge high">ALTA</span>
-                    </div>
-                    <p class="description">Migra enfermedades al modelo PacienteEnfermedad.</p>
-                    <div class="command-code">
-                        <code>python manage.py migrar_enfermedades_a_pacienteenfermedad</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Alto - Reestructura datos de enfermedades</p>
-                        <p><strong>Precaución:</strong> Verificar integridad post-migración</p>
-                    </div>
-                </div>
+# FASE 3
+python manage.py generar_derivaciones_tar
+python manage.py actualiza_derivacion_efectiva
+python manage.py actualiza_derivacion_essalud
+python manage.py actualiza_derivacion_internacional
 
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>7. migra_enfermedad_to_tarenfermedad</h4>
-                        <span class="badge high">ALTA</span>
-                    </div>
-                    <p class="description">Migra enfermedades al modelo TAREnfermedad.</p>
-                    <div class="command-code">
-                        <code>python manage.py migra_enfermedad_to_tarenfermedad</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Alto - Relaciona enfermedades con TAR</p>
-                        <p><strong>Precaución:</strong> Validar relaciones creadas</p>
-                    </div>
-                </div>
+# FASE 4
+python manage.py actualizar_condicion_eess_pacientes
 
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>8. migracion_nvih_a_intermediario_vih_tb</h4>
-                        <span class="badge high">ALTA</span>
-                    </div>
-                    <p class="description">Migra datos de NVIH a tabla intermediaria VIH-TB.</p>
-                    <div class="command-code">
-                        <code>python manage.py migracion_nvih_a_intermediario_vih_tb</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Medio - Sincroniza datos entre sistemas</p>
-                        <p><strong>Precaución:</strong> Verificar completitud de migración</p>
-                    </div>
-                </div>
-            </div>
+# FASE 5
+python manage.py eliminar_fechas_abandono_en_fallecidos
+python manage.py validate_check_de_fallecido
+read -p "¿Ejecutar set_paciente_sinadef en lotes? (s/n): " s
+if [ "$s" = "s" ]; then
+  while true; do
+    python manage.py set_paciente_sinadef --solo_abandono=1 --cantidad=1000
+    read -p "¿Otro lote de SINADEF? (s/n): " c; [ "$c" = "s" ] || break
+  done
+fi
+read -p "¿Marcar abandonos automáticos? (s/n): " a; [ "$a" = "s" ] && python manage.py automatic_abandonment_patient
 
-            <!-- FASE 3 -->
-            <div class="phase-card">
-                <div class="phase-header phase-3">
-                    <h3>FASE 3: Establecimientos de Salud</h3>
-                    <span class="badge medium">MEDIA</span>
-                </div>
-                
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>9. set_establecimiento_inicial</h4>
-                        <span class="badge medium">MEDIA</span>
-                    </div>
-                    <p class="description">Establece el establecimiento de salud inicial para pacientes.</p>
-                    <div class="command-code">
-                        <code>python manage.py set_establecimiento_inicial</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Medio - Define punto de inicio de atención</p>
-                        <p><strong>Precaución:</strong> Validar criterios de asignación</p>
-                    </div>
-                </div>
+echo "Fin: $(date)"
+echo "==== COMPLETADO ===="</pre></div>
 
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>10. actualiza_eess_origen</h4>
-                        <span class="badge medium">MEDIA</span>
-                    </div>
-                    <p class="description">Actualiza el establecimiento de salud de origen.</p>
-                    <div class="command-code">
-                        <code>python manage.py actualiza_eess_origen</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Medio - Corrige datos de origen</p>
-                        <p><strong>Precaución:</strong> Revisar cambios realizados</p>
-                    </div>
-                </div>
-
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>11. cambiar_establecimiento</h4>
-                        <span class="badge medium">MEDIA</span>
-                    </div>
-                    <p class="description">Cambia el establecimiento de salud actual de pacientes.</p>
-                    <div class="command-code">
-                        <code>python manage.py cambiar_establecimiento</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Alto - Modifica asignación actual</p>
-                        <p><strong>Precaución:</strong> Verificar justificación de cambios</p>
-                    </div>
-                </div>
-
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>12. actualizar_condicion_eess_pacientes</h4>
-                        <span class="badge medium">MEDIA</span>
-                    </div>
-                    <p class="description">Actualiza la condición de pacientes en establecimientos.</p>
-                    <div class="command-code">
-                        <code>python manage.py actualizar_condicion_eess_pacientes</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Medio - Actualiza estado en EESS</p>
-                        <p><strong>Precaución:</strong> Validar condiciones asignadas</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FASE 4 -->
-            <div class="phase-card">
-                <div class="phase-header phase-4">
-                    <h3>FASE 4: Tratamiento Antirretroviral (TAR)</h3>
-                    <span class="badge medium">MEDIA</span>
-                </div>
-                
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>13. fix_fecha_esquema_inicial</h4>
-                        <span class="badge medium">MEDIA</span>
-                    </div>
-                    <p class="description">Corrige fechas de esquema inicial de TAR.</p>
-                    <div class="command-code">
-                        <code>python manage.py fix_fecha_esquema_inicial</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Medio - Corrige fechas de inicio</p>
-                        <p><strong>Precaución:</strong> Validar lógica de corrección</p>
-                    </div>
-                </div>
-
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>14. registra_cambio_esquema_tratamiento</h4>
-                        <span class="badge medium">MEDIA</span>
-                    </div>
-                    <p class="description">Registra cambios en esquemas de tratamiento.</p>
-                    <div class="command-code">
-                        <code>python manage.py registra_cambio_esquema_tratamiento</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Alto - Documenta cambios terapéuticos</p>
-                        <p><strong>Precaución:</strong> Verificar historial de cambios</p>
-                    </div>
-                </div>
-
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>15. actualiza_condicion_tar</h4>
-                        <span class="badge medium">MEDIA</span>
-                    </div>
-                    <p class="description">Actualiza la condición de TAR de pacientes.</p>
-                    <div class="command-code">
-                        <code>python manage.py actualiza_condicion_tar</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Alto - Modifica estado de tratamiento</p>
-                        <p><strong>Precaución:</strong> Validar criterios de actualización</p>
-                    </div>
-                </div>
-
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>16. first_record_tar_to_new</h4>
-                        <span class="badge medium">MEDIA</span>
-                    </div>
-                    <p class="description">Marca primer registro TAR como "nuevo".</p>
-                    <div class="command-code">
-                        <code>python manage.py first_record_tar_to_new</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Alto - Reclasifica registros iniciales</p>
-                        <p><strong>Precaución:</strong> Revisar lógica de identificación</p>
-                    </div>
-                </div>
-
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>17. actualizar_nuevo_continuador</h4>
-                        <span class="badge medium">MEDIA</span>
-                    </div>
-                    <p class="description">Actualiza clasificación nuevo/continuador.</p>
-                    <div class="command-code">
-                        <code>python manage.py actualizar_nuevo_continuador</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Alto - Reclasifica pacientes</p>
-                        <p><strong>Precaución:</strong> Validar criterios de clasificación</p>
-                    </div>
-                </div>
-
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>18. update_paciente_continuador_si</h4>
-                        <span class="badge medium">MEDIA</span>
-                    </div>
-                    <p class="description">Marca pacientes como continuadores.</p>
-                    <div class="command-code">
-                        <code>python manage.py update_paciente_continuador_si</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Medio - Actualiza flag de continuador</p>
-                        <p><strong>Precaución:</strong> Verificar criterios aplicados</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FASE 5 -->
-            <div class="phase-card">
-                <div class="phase-header phase-5">
-                    <h3>FASE 5: Actualizaciones Complementarias</h3>
-                    <span class="badge low">BAJA</span>
-                </div>
-                
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>19. update_tipo_poblacion</h4>
-                        <span class="badge low">BAJA</span>
-                    </div>
-                    <p class="description">Actualiza el tipo de población de pacientes.</p>
-                    <div class="command-code">
-                        <code>python manage.py update_tipo_poblacion</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Bajo - Actualiza clasificación demográfica</p>
-                        <p><strong>Precaución:</strong> Revisar criterios de clasificación</p>
-                    </div>
-                </div>
-
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>20. actualizar_enfermedad_segun_bd_intermediario</h4>
-                        <span class="badge low">BAJA</span>
-                    </div>
-                    <p class="description">Actualiza enfermedades según BD intermediaria.</p>
-                    <div class="command-code">
-                        <code>python manage.py actualizar_enfermedad_segun_bd_intermediario</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Bajo - Sincroniza con fuente externa</p>
-                        <p><strong>Precaución:</strong> Validar fuente de datos</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FASE 6 -->
-            <div class="phase-card">
-                <div class="phase-header phase-6">
-                    <h3>FASE 6: Derivaciones</h3>
-                    <span class="badge low">BAJA</span>
-                </div>
-                
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>21. generar_derivaciones_tar</h4>
-                        <span class="badge low">BAJA</span>
-                    </div>
-                    <p class="description">Genera derivaciones para pacientes en TAR.</p>
-                    <div class="command-code">
-                        <code>python manage.py generar_derivaciones_tar</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Medio - Crea registros de derivación</p>
-                        <p><strong>Precaución:</strong> Validar criterios de derivación</p>
-                    </div>
-                </div>
-
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>22. actualiza_derivacion_efectiva</h4>
-                        <span class="badge low">BAJA</span>
-                    </div>
-                    <p class="description">Actualiza derivaciones efectivas.</p>
-                    <div class="command-code">
-                        <code>python manage.py actualiza_derivacion_efectiva</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Medio - Marca derivaciones completadas</p>
-                        <p><strong>Precaución:</strong> Verificar estado de derivaciones</p>
-                    </div>
-                </div>
-
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>23. actualiza_derivacion_essalud</h4>
-                        <span class="badge low">BAJA</span>
-                    </div>
-                    <p class="description">Actualiza derivaciones a EsSalud.</p>
-                    <div class="command-code">
-                        <code>python manage.py actualiza_derivacion_essalud</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Medio - Gestiona derivaciones EsSalud</p>
-                        <p><strong>Precaución:</strong> Validar convenios vigentes</p>
-                    </div>
-                </div>
-
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>24. actualiza_derivacion_internacional</h4>
-                        <span class="badge low">BAJA</span>
-                    </div>
-                    <p class="description">Actualiza derivaciones internacionales.</p>
-                    <div class="command-code">
-                        <code>python manage.py actualiza_derivacion_internacional</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Medio - Gestiona casos internacionales</p>
-                        <p><strong>Precaución:</strong> Verificar protocolos internacionales</p>
-                    </div>
-                </div>
-
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>25. derivaciones_masivas</h4>
-                        <span class="badge caution">PRECAUCIÓN</span>
-                    </div>
-                    <p class="description">Realiza derivaciones masivas de pacientes.</p>
-                    <div class="command-code">
-                        <code>python manage.py derivaciones_masivas</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Muy Alto - Afecta múltiples pacientes</p>
-                        <p><strong>Precaución:</strong> ⚠️ EJECUTAR SOLO CON SUPERVISIÓN - Validar lista de pacientes</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FASE 7 -->
-            <div class="phase-card">
-                <div class="phase-header phase-7">
-                    <h3>FASE 7: Consultas y Reportes</h3>
-                    <span class="badge info">CONSULTA</span>
-                </div>
-                
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>26. consulta_netlab_pacientes</h4>
-                        <span class="badge info">CONSULTA</span>
-                    </div>
-                    <p class="description">Consulta datos de laboratorio (NetLab) de pacientes.</p>
-                    <div class="command-code">
-                        <code>python manage.py consulta_netlab_pacientes</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Ninguno - Solo lectura</p>
-                        <p><strong>Precaución:</strong> No modifica datos</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- COMANDOS MANUALES -->
-            <div class="phase-card">
-                <div class="phase-header phase-manual">
-                    <h3>⚠️ COMANDOS DE EJECUCIÓN MANUAL</h3>
-                    <span class="badge danger">PELIGRO</span>
-                </div>
-                
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>27. automatic_abandonment_patient</h4>
-                        <span class="badge caution">PRECAUCIÓN</span>
-                    </div>
-                    <p class="description">Marca automáticamente pacientes como abandonos.</p>
-                    <div class="command-code">
-                        <code>python manage.py automatic_abandonment_patient</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Muy Alto - Cambia estado de pacientes</p>
-                        <p><strong>Precaución:</strong> ⚠️ REQUIERE APROBACIÓN - Validar criterios de abandono</p>
-                    </div>
-                </div>
-
-                <div class="command-item">
-                    <div class="command-header">
-                        <h4>28. eliminar_paciente</h4>
-                        <span class="badge danger">PELIGRO</span>
-                    </div>
-                    <p class="description">Elimina registros de pacientes de la base de datos.</p>
-                    <div class="command-code">
-                        <code>python manage.py eliminar_paciente</code>
-                    </div>
-                    <div class="command-details">
-                        <p><strong>Impacto:</strong> Crítico - ELIMINACIÓN PERMANENTE</p>
-                        <p><strong>Precaución:</strong> 🚨 EXTREMA PRECAUCIÓN - Solo con autorización explícita</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FOOTER -->
-        <footer>
-            <p>📅 Última actualización: <span id="fecha"></span></p>
-            <p>🔒 Documento confidencial - Uso interno</p>
-        </footer>
+      <div class="resumen">
+        <h3>Resumen de la Fase 5 (limpieza de fallecidos/abandono)</h3>
+        <ul>
+          <li>1) eliminar_fechas_abandono_en_fallecidos</li>
+          <li>2) validate_check_de_fallecido</li>
+          <li>3) set_paciente_sinadef (lotes)</li>
+          <li>4) automatic_abandonment_patient (si aplica)</li>
+        </ul>
+      </div>
     </div>
-
-    <script src="script.js"></script>
-</body>
-</html>"""
-
-# Guardar index.html
-with open('nvih_commands_website/index.html', 'w', encoding='utf-8') as f:
-    f.write(index_html)
-
-print("✅ index.html generado")
+  </body>
+</html>
