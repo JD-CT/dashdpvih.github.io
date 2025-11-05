@@ -1,198 +1,1286 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Plan de Ejecución Comandos NVIH - Completo</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comandos del Sistema NVIH - Organizados por Fases de Ejecución</title>
     <style>
-      *{margin:0;padding:0;box-sizing:border-box}
-      body{font-family:Segoe UI,Roboto,Arial,sans-serif;line-height:1.6;color:#333;background:#f5f5f5;padding:20px}
-      .container{max-width:1400px;margin:0 auto;background:#fff;padding:30px;border-radius:10px;box-shadow:0 0 20px rgba(0,0,0,.1)}
-      h1{color:#2c3e50;text-align:center;margin-bottom:10px;font-size:2.5em;border-bottom:4px solid #3498db;padding-bottom:15px}
-      .subtitle{text-align:center;color:#7f8c8d;margin-bottom:30px;font-size:1.05em}
-      .fase{margin:30px 0;border-left:5px solid #3498db;padding-left:20px}
-      .fase h2{color:#2c3e50;margin-bottom:15px;font-size:1.6em}
-      .fase-critica{border-left-color:#e74c3c}.fase-importante{border-left-color:#f39c12}.fase-media{border-left-color:#3498db}.fase-opcional{border-left-color:#95a5a6}
-      table{width:100%;border-collapse:collapse;margin:20px 0;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.06)}
-      thead{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff}
-      th{padding:14px;text-align:left;font-weight:600;font-size:.95em;text-transform:uppercase;letter-spacing:.3px}
-      td{padding:12px 14px;border-bottom:1px solid #ecf0f1}
-      tbody tr:hover{background:#f8f9fa;transition:.2s}
-      .badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:.85em;font-weight:600;min-width:80px;text-align:center}
-      .badge-si{background:#27ae60;color:#fff}.badge-no{background:#e74c3c;color:#fff}.badge-cuidado{background:#f39c12;color:#fff}.badge-depende{background:#3498db;color:#fff}.badge-manual{background:#95a5a6;color:#fff}
-      .prioridad{font-weight:700;padding:5px 10px;border-radius:5px;display:inline-block}
-      .prioridad-critica{background:#ffebee;color:#c62828}.prioridad-alta{background:#fff3e0;color:#e65100}.prioridad-media{background:#e3f2fd;color:#1565c0}.prioridad-baja{background:#f3e5f5;color:#6a1b9a}
-      .comando{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#2c3e50;color:#2ecc71;padding:3px 8px;border-radius:4px;font-size:.9em;font-weight:600}
-      .resumen{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:22px;border-radius:10px;margin:30px 0}
-      .resumen h3{margin-bottom:10px;font-size:1.3em}
-      .warning-box{background:#fff3cd;border-left:5px solid #ffc107;padding:16px;margin:20px 0;border-radius:6px}
-      .warning-box h4{color:#856404;margin-bottom:8px;font-size:1.05em}
-      .script-box{background:#2c3e50;color:#2ecc71;padding:16px;border-radius:8px;margin:20px 0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;overflow:auto;max-height:500px}
-      .numero-orden{background:#667eea;color:#fff;border-radius:50%;width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;font-weight:bold;font-size:.85em}
-      .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:20px 0}
-      .stat-card{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:16px;border-radius:10px;text-align:center}
-      .stat-card h3{font-size:2.1em;margin-bottom:4px}
-      .note{font-size:.9em;color:#64748b}
-      @media print{body{background:#fff;padding:0}.container{box-shadow:none;padding:20px}.script-box{max-height:none}}
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: #f5f5f5;
+        padding: 20px;
+    }
+    
+    .container {
+        max-width: 1800px;
+        margin: 0 auto;
+        background: white;
+        padding: 30px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        border-radius: 10px;
+    }
+    
+    h1 {
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 2.5em;
+        border-bottom: 4px solid #3498db;
+        padding-bottom: 15px;
+    }
+    
+    .subtitle {
+        text-align: center;
+        color: #7f8c8d;
+        margin-bottom: 30px;
+        font-size: 1.1em;
+    }
+    
+    .fase {
+        margin: 30px 0;
+        border-left: 5px solid #3498db;
+        padding-left: 20px;
+    }
+    
+    .fase h2 {
+        color: #2c3e50;
+        margin-bottom: 15px;
+        font-size: 1.8em;
+    }
+    
+    .fase-critica { border-left-color: #e74c3c; }
+    .fase-importante { border-left-color: #f39c12; }
+    .fase-media { border-left-color: #3498db; }
+    .fase-opcional { border-left-color: #95a5a6; }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background: white;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+    
+    th {
+        padding: 15px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 0.95em;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #ecf0f1;
+    }
+    
+    tbody tr:hover {
+        background-color: #f8f9fa;
+        transition: background-color 0.3s ease;
+    }
+    
+    .badge {
+        display: inline-block;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.85em;
+        font-weight: 600;
+        text-align: center;
+        min-width: 100px;
+    }
+    
+    .badge-paciente {
+        background: #3498db;
+        color: white;
+    }
+    
+    .badge-taratencion {
+        background: #9b59b6;
+        color: white;
+    }
+    
+    .badge-si {
+        background: #27ae60;
+        color: white;
+    }
+    
+    .badge-no {
+        background: #e74c3c;
+        color: white;
+    }
+    
+    .badge-depende {
+        background: #f39c12;
+        color: white;
+    }
+    
+    .badge-manual {
+        background: #95a5a6;
+        color: white;
+    }
+    
+    .prioridad {
+        font-weight: 700;
+        padding: 5px 10px;
+        border-radius: 5px;
+        display: inline-block;
+    }
+    
+    .prioridad-critica {
+        background: #ffebee;
+        color: #c62828;
+    }
+    
+    .prioridad-alta {
+        background: #fff3e0;
+        color: #e65100;
+    }
+    
+    .prioridad-media {
+        background: #e3f2fd;
+        color: #1565c0;
+    }
+    
+    .prioridad-baja {
+        background: #f3e5f5;
+        color: #6a1b9a;
+    }
+    
+    .comando {
+        font-family: 'Courier New', monospace;
+        background: #2c3e50;
+        color: #2ecc71;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 0.9em;
+        font-weight: 600;
+    }
+    
+    .resumen {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 25px;
+        border-radius: 10px;
+        margin: 30px 0;
+    }
+    
+    .resumen h3 {
+        margin-bottom: 15px;
+        font-size: 1.5em;
+    }
+    
+    .resumen ul {
+        list-style: none;
+        padding-left: 0;
+    }
+    
+    .resumen li {
+        padding: 8px 0;
+        padding-left: 25px;
+        position: relative;
+    }
+    
+    .resumen li:before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+        color: #2ecc71;
+    }
+    
+    .warning-box {
+        background: #fff3cd;
+        border-left: 5px solid #ffc107;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 5px;
+    }
+    
+    .warning-box h4 {
+        color: #856404;
+        margin-bottom: 10px;
+        font-size: 1.2em;
+    }
+    
+    .warning-box ul {
+        margin-left: 20px;
+        color: #856404;
+    }
+    
+    .info-box {
+        background: #d1ecf1;
+        border-left: 5px solid #17a2b8;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 5px;
+    }
+    
+    .info-box h4 {
+        color: #0c5460;
+        margin-bottom: 10px;
+        font-size: 1.2em;
+    }
+    
+    .script-box {
+        background: #2c3e50;
+        color: #2ecc71;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9em;
+        overflow-x: auto;
+        max-height: 500px;
+        overflow-y: auto;
+    }
+    
+    .script-box pre {
+        margin: 0;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+    
+    .numero-orden {
+        background: #667eea;
+        color: white;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 0.9em;
+    }
+    
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+    }
+    
+    .stat-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .stat-card h3 {
+        font-size: 2.5em;
+        margin-bottom: 5px;
+    }
+    
+    .stat-card p {
+        font-size: 0.9em;
+        opacity: 0.9;
+    }
+    
+    @media print {
+        body {
+            background: white;
+            padding: 0;
+        }
+        
+        .container {
+            box-shadow: none;
+            padding: 20px;
+        }
+        
+        .script-box {
+            max-height: none;
+        }
+    }
+    
+    .toc {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+    }
+    
+    .toc h3 {
+        color: #2c3e50;
+        margin-bottom: 15px;
+    }
+    
+    .toc ul {
+        list-style: none;
+        padding-left: 0;
+    }
+    
+    .toc li {
+        padding: 8px 0;
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    .toc li:last-child {
+        border-bottom: none;
+    }
+    
+    .toc a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    
+    .toc a:hover {
+        text-decoration: underline;
+    }
+    
+    .command-detail {
+        margin: 10px 0;
+        padding: 10px;
+        background: #f8f9fa;
+        border-radius: 5px;
+    }
+    
+    .command-detail strong {
+        color: #2c3e50;
+    }
+    
+    code {
+        background: #2c3e50;
+        color: #2ecc71;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9em;
+    }
+    
+    .deprecated-row {
+        background: #fff3e0 !important;
+        opacity: 0.8;
+        position: relative;
+    }
+    
+    .deprecated-badge {
+        background: #ff6b6b;
+        color: white;
+        padding: 5px 12px;
+        border-radius: 5px;
+        font-size: 0.85em;
+        font-weight: 700;
+        text-transform: uppercase;
+        display: inline-block;
+        margin-bottom: 10px;
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+    }
+    
+    .deprecated-note {
+        background: #ffe0b2;
+        border-left: 4px solid #ff6b6b;
+        padding: 12px;
+        margin-top: 10px;
+        border-radius: 4px;
+        font-weight: 600;
+        color: #bf360c;
+    }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div class="container">
-      <h1>📋 Plan de Ejecución Comandos NVIH</h1>
-      <p class="subtitle">Guía completa y ordenada para la corrección de datos del sistema</p>
-
-      <div class="stats">
-        <div class="stat-card"><h3>23</h3><p>Comandos Totales</p></div>
-        <div class="stat-card"><h3>15</h3><p>Obligatorios</p></div>
-        <div class="stat-card"><h3>5</h3><p>Opcionales</p></div>
-        <div class="stat-card"><h3>3</h3><p>Solo Manuales</p></div>
-      </div>
-
-      <h2 style="color:#2c3e50;margin-top:26px;margin-bottom:10px;">📊 Tabla Completa de Comandos</h2>
-      <table>
-        <thead>
-          <tr>
-            <th style="width:6%">#</th>
-            <th style="width:22%">Comando</th>
-            <th style="width:34%">Función</th>
-            <th style="width:14%">Alcance</th>
-            <th style="width:10%">¿Ejecutar?</th>
-            <th style="width:14%">Prioridad / Fase</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td><span class="numero-orden">1</span></td><td><span class="comando">fix_fecha_esquema_inicial</span></td><td>Corrige fecha_esquema_tratamiento del primer TAR si es NULL</td><td>Pacientes con TAR</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-critica">Crítica · F1</span></td></tr>
-          <tr><td><span class="numero-orden">2</span></td><td><span class="comando">set_establecimiento_inicial</span></td><td>Asigna establecimiento_salud_inicial según primer TAR</td><td>Sin EESS inicial</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-critica">Crítica · F1</span></td></tr>
-          <tr><td><span class="numero-orden">3</span></td><td><span class="comando">actualiza_condicion_tar</span></td><td>Corrige tipo_condicion (Nuevo/Continuador) en TAR</td><td>Todos los TAR</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-critica">Crítica · F1</span></td></tr>
-          <tr><td><span class="numero-orden">4</span></td><td><span class="comando">update_paciente_continuador_si</span></td><td>Sincroniza paciente_continuador según primer TAR</td><td>Con TAR</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-critica">Crítica · F1</span></td></tr>
-          <tr><td><span class="numero-orden">5</span></td><td><span class="comando">migra_enfermedad_to_tarenfermedad</span></td><td>Migra enfermedades de paciente_enfermedad a TAR</td><td>Enfermedades sin migrar</td><td><span class="badge badge-depende">DEPENDE</span></td><td><span class="prioridad prioridad-media">Media · F1</span></td></tr>
-          <tr><td><span class="numero-orden">6</span></td><td><span class="comando">actualiza_eess_origen</span></td><td>Actualiza eess_origen desde primer TAR</td><td>Con TAR</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-alta">Alta · F2</span></td></tr>
-          <tr><td><span class="numero-orden">7</span></td><td><span class="comando">generar_derivaciones_tar</span></td><td>Genera derivaciones por cambios de EESS</td><td>Multi-EESS</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-alta">Alta · F3</span></td></tr>
-          <tr><td><span class="numero-orden">8</span></td><td><span class="comando">actualiza_derivacion_efectiva</span></td><td>Marca derivaciones como efectivas si hay TAR destino</td><td>Todas</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-alta">Alta · F3</span></td></tr>
-          <tr><td><span class="numero-orden">9</span></td><td><span class="comando">actualiza_derivacion_essalud</span></td><td>Asume efectivas derivaciones a ESSALUD</td><td>ESSALUD</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-alta">Alta · F3</span></td></tr>
-          <tr><td><span class="numero-orden">10</span></td><td><span class="comando">actualiza_derivacion_internacional</span></td><td>Marca efectivas derivaciones internacionales</td><td>Internacional</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-alta">Alta · F3</span></td></tr>
-          <tr><td><span class="numero-orden">11</span></td><td><span class="comando">actualizar_condicion_eess_pacientes</span></td><td>Sincroniza condición y EESS actual según último TAR/derivación</td><td>Todos</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-critica">Crítica · F4</span></td></tr>
-          <tr><td><span class="numero-orden">12</span></td><td><span class="comando">eliminar_fechas_abandono_en_fallecidos</span></td><td>Elimina fechas de abandono posteriores al fallecimiento</td><td>Fallecidos</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-media">Media · F5</span></td></tr>
-          <tr><td><span class="numero-orden">13</span></td><td><span class="comando">validate_check_de_fallecido</span></td><td>Pone es_fallecido=False cuando no hay fecha_defuncion (corrige checks marcados por error)</td><td>Pacientes con es_fallecido=True y fecha_defuncion NULL</td><td><span class="badge badge-si">✓ SÍ</span></td><td><span class="prioridad prioridad-media">Media · F5</span></td></tr>
-          <tr><td><span class="numero-orden">14</span></td><td><span class="comando">set_paciente_sinadef</span></td><td>Consulta SINADEF y actualiza fallecimientos</td><td>Pacientes (mejor en lotes)</td><td><span class="badge badge-cuidado">⚠ CUIDADO</span></td><td><span class="prioridad prioridad-media">Media · F5</span></td></tr>
-          <tr><td><span class="numero-orden">15</span></td><td><span class="comando">automatic_abandonment_patient</span></td><td>Marca abandono por criterios de inactividad</td><td>Sin atención reciente</td><td><span class="badge badge-cuidado">⚠ CUIDADO</span></td><td><span class="prioridad prioridad-media">Media · F5</span></td></tr>
-          <tr><td><span class="numero-orden">16</span></td><td><span class="comando">registra_cambio_esquema_tratamiento</span></td><td>Historial de cambios de esquema</td><td>Con 2+ TAR</td><td><span class="badge badge-depende">DEPENDE</span></td><td><span class="prioridad prioridad-baja">Baja · F6</span></td></tr>
-          <tr><td><span class="numero-orden">17</span></td><td><span class="comando">update_tipo_poblacion</span></td><td>Fija tipo_poblacion="General" para menores de 12</td><td>≤ 12 años</td><td><span class="badge badge-depende">DEPENDE</span></td><td><span class="prioridad prioridad-baja">Baja · F6</span></td></tr>
-          <tr><td><span class="numero-orden">18</span></td><td><span class="comando">validar_diagnosticos</span></td><td>Elimina diagnósticos con fecha incorrecta</td><td>Diagnósticos inconsistentes</td><td><span class="badge badge-depende">DEPENDE</span></td><td><span class="prioridad prioridad-baja">Baja · F6</span></td></tr>
-          <tr><td><span class="numero-orden">19</span></td><td><span class="comando">diagnostico_vih_pacientes</span></td><td>Genera diagnósticos VIH desde servicio externo</td><td>Pacientes sin diagnóstico</td><td><span class="badge badge-depende">DEPENDE</span></td><td><span class="prioridad prioridad-baja">Baja · F6</span></td></tr>
-          <tr><td><span class="numero-orden">20</span></td><td><span class="comando">migrar_enfermedades_a_pacienteenfermedad</span></td><td>Migra enfermedades desde tabla TAR a paciente</td><td>Cuando cambia el modelo</td><td><span class="badge badge-depende">DEPENDE</span></td><td><span class="prioridad prioridad-baja">Baja · F6</span></td></tr>
-          <tr><td><span class="numero-orden">21</span></td><td><span class="comando">consulta_netlab_pacientes</span></td><td>Actualiza resultados de NetLab</td><td>Por EESS/lotes</td><td><span class="badge badge-depende">DEPENDE</span></td><td><span class="prioridad prioridad-baja">Baja · F6</span></td></tr>
-          <tr><td><span class="numero-orden">22</span></td><td><span class="comando">migracion_nvih_a_intermediario_vih_tb</span></td><td>Exporta datos a BD intermediaria VIH-TB</td><td>Para reportes TB</td><td><span class="badge badge-depende">DEPENDE</span></td><td><span class="prioridad prioridad-baja">Baja · F6</span></td></tr>
-          <tr><td><span class="numero-orden">23</span></td><td><span class="comando">actualizar_enfermedad_segun_bd_intermediario</span></td><td>Sincroniza enfermedades desde BD intermediaria</td><td>Enfermedades externas</td><td><span class="badge badge-depende">DEPENDE</span></td><td><span class="prioridad prioridad-baja">Baja · F6</span></td></tr>
-          <tr><td>-</td><td><span class="comando">cambiar_establecimiento</span></td><td>Migrar pacientes de un EESS a otro (casos puntuales)</td><td>Pacientes específicos</td><td><span class="badge badge-manual">MANUAL</span></td><td><span class="prioridad prioridad-baja">Manual</span></td></tr>
-          <tr><td>-</td><td><span class="comando">derivaciones_masivas</span></td><td>Crea derivaciones para una lista</td><td>Lista específica</td><td><span class="badge badge-manual">MANUAL</span></td><td><span class="prioridad prioridad-baja">Manual</span></td></tr>
-          <tr><td>-</td><td><span class="comando">eliminar_paciente</span></td><td>Elimina pacientes por documento</td><td>Pacientes específicos</td><td><span class="badge badge-manual">MANUAL</span></td><td><span class="prioridad prioridad-baja">Manual</span></td></tr>
-        </tbody>
-      </table>
-
-      <div id="fase5" class="fase fase-media">
-        <h2>🟣 FASE 5: Condiciones Especiales (Importante)</h2>
-        <table>
-          <thead><tr><th>Orden</th><th>Comando</th><th>Descripción</th><th>Comando de Ejecución</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><span class="numero-orden">12</span></td>
-              <td><span class="comando">eliminar_fechas_abandono_en_fallecidos</span></td>
-              <td>Elimina fecha de abandono cuando es posterior a la fecha de fallecimiento.</td>
-              <td><code>python manage.py eliminar_fechas_abandono_en_fallecidos</code></td>
-            </tr>
-            <tr>
-              <td><span class="numero-orden">13</span></td>
-              <td><span class="comando">validate_check_de_fallecido</span></td>
-              <td>
-                Establece <code>es_fallecido=False</code> en <code>paciente_paciente</code> cuando <code>fecha_defuncion</code> es NULL. 
-                Basado en tu script: hace un <code>bulk_update</code> y loguea en <code>static/validate_check_de_fallecido_log.txt</code>.
-              </td>
-              <td><code>python manage.py validate_check_de_fallecido</code></td>
-            </tr>
-            <tr>
-              <td><span class="numero-orden">14</span></td>
-              <td><span class="comando">set_paciente_sinadef</span></td>
-              <td>Consulta SINADEF para actualizar fallecidos. Recomendado en lotes.</td>
-              <td>
-                <code>python manage.py set_paciente_sinadef --solo_abandono=1 --cantidad=1000</code><br/>
-                o<br/>
-                <code>python manage.py set_paciente_sinadef --cantidad=1000</code>
-              </td>
-            </tr>
-            <tr>
-              <td><span class="numero-orden">15</span></td>
-              <td><span class="comando">automatic_abandonment_patient</span></td>
-              <td>Marca abandonos automáticos por inactividad (revisar lógica).</td>
-              <td><code>python manage.py automatic_abandonment_patient</code></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="warning-box">
-        <h4>⚠️ Advertencias</h4>
-        <ul>
-          <li>Backup obligatorio de la BD antes de ejecutar.</li>
-          <li>Primero en ambiente de prueba o con lotes pequeños.</li>
-          <li>Monitorea archivos de log en la carpeta <code>static/</code>.</li>
-        </ul>
-      </div>
-
-      <h2 style="color:#2c3e50;margin-top:26px;margin-bottom:10px;">🚀 Script de Ejecución Completo</h2>
-      <div class="script-box"><pre>#!/bin/bash
-set -e
-
-echo "==== SCRIPT ORDENAMIENTO NVIH ===="
-echo "Inicio: $(date)"
-
-# FASE 1
-python manage.py fix_fecha_esquema_inicial
-python manage.py set_establecimiento_inicial
-# Lotes para tipo_condicion
-while true; do
-  python manage.py actualiza_condicion_tar --cantidad=5000
-  read -p "¿Otro lote de actualiza_condicion_tar? (s/n): " c; [ "$c" = "s" ] || break
-done
-python manage.py update_paciente_continuador_si
-read -p "¿Migrar enfermedades a TAR? (s/n): " m; [ "$m" = "s" ] && python manage.py migra_enfermedad_to_tarenfermedad
-
-# FASE 2
-python manage.py actualiza_eess_origen
-
-# FASE 3
-python manage.py generar_derivaciones_tar
-python manage.py actualiza_derivacion_efectiva
-python manage.py actualiza_derivacion_essalud
-python manage.py actualiza_derivacion_internacional
-
-# FASE 4
-python manage.py actualizar_condicion_eess_pacientes
-
-# FASE 5
-python manage.py eliminar_fechas_abandono_en_fallecidos
-python manage.py validate_check_de_fallecido
-read -p "¿Ejecutar set_paciente_sinadef en lotes? (s/n): " s
-if [ "$s" = "s" ]; then
-  while true; do
-    python manage.py set_paciente_sinadef --solo_abandono=1 --cantidad=1000
-    read -p "¿Otro lote de SINADEF? (s/n): " c; [ "$c" = "s" ] || break
-  done
-fi
-read -p "¿Marcar abandonos automáticos? (s/n): " a; [ "$a" = "s" ] && python manage.py automatic_abandonment_patient
-
-echo "Fin: $(date)"
-echo "==== COMPLETADO ===="</pre></div>
-
-      <div class="resumen">
-        <h3>Resumen de la Fase 5 (limpieza de fallecidos/abandono)</h3>
-        <ul>
-          <li>1) eliminar_fechas_abandono_en_fallecidos</li>
-          <li>2) validate_check_de_fallecido</li>
-          <li>3) set_paciente_sinadef (lotes)</li>
-          <li>4) automatic_abandonment_patient (si aplica)</li>
-        </ul>
-      </div>
+        <h1>📋 Comandos del Sistema NVIH</h1>
+        <p class="subtitle">Organizados por Fases de Ejecución - Guía Completa</p>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <h3>28</h3>
+                <p>Comandos Totales (2 deprecados)</p>
+            </div>
+            <div class="stat-card">
+                <h3>20</h3>
+                <p>Repositorio paciente_paciente</p>
+            </div>
+            <div class="stat-card">
+                <h3>8</h3>
+                <p>Repositorio taratencion (2 deprecados)</p>
+            </div>
+            <div class="stat-card">
+                <h3>3</h3>
+                <p>Comandos Manuales</p>
+            </div>
+        </div>
+        
+        <div class="toc">
+            <h3>📑 Índice de Contenidos</h3>
+            <ul>
+                <li><a href="#resumen">Resumen Ejecutivo</a></li>
+                <li><a href="#fase1">Fase 1: Configuración Inicial y Corrección de Datos TAR (CRÍTICO)</a></li>
+                <li><a href="#fase2">Fase 2: Migración de Datos y Sincronización de Establecimientos</a></li>
+                <li><a href="#fase3">Fase 3: Generación y Actualización de Derivaciones (IMPORTANTE)</a></li>
+                <li><a href="#fase4">Fase 4: Sincronización Final del Estado de Pacientes (CRÍTICO)</a></li>
+                <li><a href="#fase5">Fase 5: Validación de Condiciones Especiales (IMPORTANTE)</a></li>
+                <li><a href="#fase6">Fase 6: Actualizaciones Complementarias y Calidad de Datos</a></li>
+                <li><a href="#manuales">Comandos Manuales (Ejecutar solo cuando sea necesario)</a></li>
+                <li><a href="#checklist">Checklist de Pre-Ejecución</a></li>
+            </ul>
+        </div>
+        
+        <div id="resumen" class="resumen">
+            <h3>📊 Resumen Ejecutivo</h3>
+            <p>Este documento organiza los 28 comandos del sistema NVIH según su secuencia lógica de ejecución, agrupados en 6 fases principales más comandos manuales. <strong>Nota:</strong> 2 comandos están marcados como deprecados.</p>
+            <ul>
+                <li><strong>Fase 1:</strong> 6 comandos para corregir datos base de TAR (taratencion) - <em>2 deprecados</em></li>
+                <li><strong>Fase 2:</strong> 2 comandos para migrar enfermedades y actualizar establecimientos</li>
+                <li><strong>Fase 3:</strong> 4 comandos para generar y validar derivaciones</li>
+                <li><strong>Fase 4:</strong> 1 comando crítico de sincronización final</li>
+                <li><strong>Fase 5:</strong> 4 comandos para validar fallecidos y abandonos</li>
+                <li><strong>Fase 6:</strong> 8 comandos complementarios opcionales</li>
+                <li><strong>Manuales:</strong> 3 comandos de ejecución manual únicamente</li>
+            </ul>
+        </div>
+        
+        <div class="warning-box">
+            <h4>⚠️ Advertencias Críticas Antes de Ejecutar</h4>
+            <ul>
+                <li><strong>Backup Obligatorio:</strong> Realiza un backup completo de la base de datos antes de cualquier ejecución</li>
+                <li><strong>Ambiente de Prueba:</strong> Ejecuta primero en desarrollo o staging</li>
+                <li><strong>Horario:</strong> Programa para horarios de bajo tráfico o mantenimiento</li>
+                <li><strong>Logs:</strong> Todos los comandos generan logs en la carpeta <code>static/</code></li>
+                <li><strong>Dependencias:</strong> Respeta el orden de ejecución de las fases</li>
+                <li><strong>Servicios Externos:</strong> Verifica disponibilidad de SINADEF, NetLab, HISMINSA antes de ejecutar</li>
+            </ul>
+        </div>
+        
+        <!-- FASE 1 -->
+        <div id="fase1" class="fase fase-critica">
+            <h2>🔴 FASE 1: Configuración Inicial y Corrección de Datos TAR (CRÍTICO)</h2>
+            <p><strong>Objetivo:</strong> Establecer y corregir la información fundamental de los registros TAR que sirve como base para todos los procesos posteriores.</p>
+            <p><strong>Tiempo estimado:</strong> 2-4 horas</p>
+            <p><strong>Dependencias:</strong> Ninguna - Esta es la fase inicial</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 5%;">#</th>
+                        <th style="width: 25%;">Comando</th>
+                        <th style="width: 15%;">Alcance</th>
+                        <th style="width: 45%;">Descripción y Uso</th>
+                        <th style="width: 10%;">Prioridad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="numero-orden">1</span></td>
+                        <td><span class="comando">fix_fecha_esquema_inicial</span></td>
+                        <td><span class="badge badge-taratencion">taratencion</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Corrige los campos 'fecha_inicio_tar' y 'esquema_inicial' en los registros TAR cuando no coinciden con el primer registro del paciente.<br><br>
+                                <strong>¿Por qué es crítico?</strong> Sin fechas correctas, no se puede determinar el inicio del tratamiento ni calcular antigüedad.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py fix_fecha_esquema_inicial</code><br><br>
+                                <strong>Impacto:</strong> Actualiza fecha_inicio_tar y esquema_inicial según el primer TAR de cada paciente<br>
+                                <strong>Log:</strong> static/fix_fecha_esquema_inicial.txt
+                            </div>
+                        </td>
+                        <td><span class="prioridad prioridad-critica">CRÍTICA</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="numero-orden">2</span></td>
+                        <td><span class="comando">set_establecimiento_inicial</span></td>
+                        <td><span class="badge badge-taratencion">taratencion</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Establece el campo 'establecimiento_salud_id' en la tabla paciente_paciente para pacientes que tienen TAR pero no tienen establecimiento inicial asignado.<br><br>
+                                <strong>¿Por qué es crítico?</strong> Define el punto de origen del paciente en el sistema, necesario para derivaciones.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py set_establecimiento_inicial</code><br><br>
+                                <strong>Impacto:</strong> Asigna el EESS del primer TAR como establecimiento inicial del paciente<br>
+                                <strong>Log:</strong> static/set_establecimiento_inicial_pacientes_log.txt
+                            </div>
+                        </td>
+                        <td><span class="prioridad prioridad-critica">CRÍTICA</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="numero-orden">3</span></td>
+                        <td><span class="comando">actualiza_condicion_tar</span></td>
+                        <td><span class="badge badge-taratencion">taratencion</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Actualiza el campo 'tipo_condicion' en los registros TAR: marca el primer registro como '01' (NUEVO) y los siguientes como '08' (CONTINUADOR).<br><br>
+                                <strong>¿Por qué es crítico?</strong> Determina correctamente si el paciente es nuevo o continuador en cada atención.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py actualiza_condicion_tar --cantidad=5000</code><br><br>
+                                <strong>Parámetros:</strong><br>
+                                • --cantidad: Número de pacientes a procesar por lote (recomendado: 5000)<br><br>
+                                <strong>Impacto:</strong> Corrige tipo_condicion en registros TAR, afecta reportes epidemiológicos<br>
+                                <strong>Nota:</strong> Ejecutar en lotes hasta que no haya más registros<br>
+                                <strong>Log:</strong> static/actualiza_condicion_tar.txt
+                            </div>
+                        </td>
+                        <td><span class="prioridad prioridad-critica">CRÍTICA</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="numero-orden">4</span></td>
+                        <td><span class="comando">update_paciente_continuador_si</span></td>
+                        <td><span class="badge badge-taratencion">taratencion</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Actualiza el campo 'paciente_continuador' a 'SI' en todos los registros TAR donde tipo_condicion sea '08' (CONTINUADOR).<br><br>
+                                <strong>¿Por qué es crítico?</strong> Mantiene consistencia entre tipo_condicion y paciente_continuador.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py update_paciente_continuador_si</code><br><br>
+                                <strong>Impacto:</strong> Sincroniza campo paciente_continuador con tipo_condicion<br>
+                                <strong>Log:</strong> Se ejecuta directamente sin log de archivo
+                            </div>
+                        </td>
+                        <td><span class="prioridad prioridad-critica">CRÍTICA</span></td>
+                    </tr>
+                    <tr class="deprecated-row">
+                        <td><span class="numero-orden">5</span></td>
+                        <td>
+                            <span class="comando">first_record_tar_to_new</span><br>
+                            <span class="deprecated-badge">⚠️ DEPRECADO</span>
+                        </td>
+                        <td><span class="badge badge-taratencion">taratencion</span></td>
+                        <td>
+                            <div class="deprecated-note">
+                                ⛔ <strong>COMANDO DEPRECADO:</strong> Este comando ya no es necesario porque <code>update_paciente_continuador_si</code> (comando #4) es más completo y cumple la misma lógica de manera más eficiente. Use el comando #4 en su lugar.
+                            </div>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Establece el campo 'tipo_condicion' como '01' (NUEVO) en el primer registro TAR de cada paciente.<br><br>
+                                <strong>¿Por qué es importante?</strong> Asegura que el primer registro siempre sea marcado como NUEVO.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py first_record_tar_to_new</code><br>
+                                <code>python manage.py first_record_tar_to_new --eess=6000</code><br><br>
+                                <strong>Parámetros:</strong><br>
+                                • --eess: (Opcional) RENIPRES del establecimiento específico<br><br>
+                                <strong>Impacto:</strong> Marca correctamente los primeros registros como NUEVO<br>
+                                <strong>Log:</strong> Se ejecuta directamente sin log de archivo
+                            </div>
+                        </td>
+                        <td><span class="prioridad prioridad-alta">ALTA</span></td>
+                    </tr>
+                    <tr class="deprecated-row">
+                        <td><span class="numero-orden">6</span></td>
+                        <td>
+                            <span class="comando">actualizar_nuevo_continuador</span><br>
+                            <span class="deprecated-badge">⚠️ DEPRECADO</span>
+                        </td>
+                        <td><span class="badge badge-taratencion">taratencion</span></td>
+                        <td>
+                            <div class="deprecated-note">
+                                ⛔ <strong>COMANDO DEPRECADO:</strong> Este comando ya no es necesario porque <code>update_paciente_continuador_si</code> (comando #4) es más completo y cumple la misma lógica de manera más eficiente. Use el comando #4 en su lugar.
+                            </div>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Actualiza a CONTINUADOR ('08') los registros TAR que están marcados como NUEVO ('01') pero no son el primer registro del paciente.<br><br>
+                                <strong>¿Por qué es importante?</strong> Corrige inconsistencias donde múltiples registros están marcados como NUEVO.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py actualizar_nuevo_continuador</code><br><br>
+                                <strong>Impacto:</strong> Corrige tipo_condicion en registros posteriores al primero<br>
+                                <strong>Log:</strong> Se ejecuta directamente sin log de archivo
+                            </div>
+                        </td>
+                        <td><span class="prioridad prioridad-alta">ALTA</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- FASE 2 -->
+        <div id="fase2" class="fase fase-importante">
+            <h2>🟡 FASE 2: Migración de Datos y Sincronización de Establecimientos</h2>
+            <p><strong>Objetivo:</strong> Migrar datos de enfermedades entre tablas y actualizar información de establecimientos de salud.</p>
+            <p><strong>Tiempo estimado:</strong> 30 minutos - 1 hora</p>
+            <p><strong>Dependencias:</strong> Requiere que la Fase 1 esté completa</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 5%;">#</th>
+                        <th style="width: 25%;">Comando</th>
+                        <th style="width: 15%;">Alcance</th>
+                        <th style="width: 45%;">Descripción y Uso</th>
+                        <th style="width: 10%;">Prioridad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="numero-orden">7</span></td>
+                        <td><span class="comando">migra_enfermedad_to_tarenfermedad</span></td>
+                        <td><span class="badge badge-taratencion">taratencion</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Sincroniza enfermedades de la tabla paciente_enfermedad hacia taratencion_enfermedadtaratencion para pacientes con TAR creados después del 10/06/2025.<br><br>
+                                <strong>¿Cuándo ejecutar?</strong> Solo si tienes enfermedades en la tabla paciente que deben estar asociadas a TAR.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py migra_enfermedad_to_tarenfermedad</code><br><br>
+                                <strong>Impacto:</strong> Crea registros de enfermedades asociadas al último TAR del paciente<br>
+                                <strong>Nota:</strong> No migra si ya existe el registro<br>
+                                <strong>Log:</strong> static/migra_enfermedad_to_tarenfermedad_log.txt
+                            </div>
+                        </td>
+                        <td><span class="prioridad prioridad-media">MEDIA</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="numero-orden">8</span></td>
+                        <td><span class="comando">actualiza_eess_origen</span></td>
+                        <td><span class="badge badge-paciente">paciente_paciente</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Actualiza el campo 'establecimiento_salud_id' (EESS origen) según el EESS del primer TAR del paciente.<br><br>
+                                <strong>¿Por qué es importante?</strong> Define correctamente el EESS de origen, necesario para generar derivaciones.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py actualiza_eess_origen</code><br><br>
+                                <strong>Impacto:</strong> Actualiza EESS origen según primer registro TAR<br>
+                                <strong>Dependencia:</strong> Debe ejecutarse después de set_establecimiento_inicial<br>
+                                <strong>Log:</strong> static/actualiza_eess_origen_log.txt
+                            </div>
+                        </td>
+                        <td><span class="prioridad prioridad-alta">ALTA</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- FASE 3 -->
+        <div id="fase3" class="fase fase-importante">
+            <h2>🟢 FASE 3: Generación y Actualización de Derivaciones (IMPORTANTE)</h2>
+            <p><strong>Objetivo:</strong> Generar derivaciones automáticas cuando se detectan cambios de EESS y marcar las derivaciones como efectivas según corresponda.</p>
+            <p><strong>Tiempo estimado:</strong> 1-2 horas</p>
+            <p><strong>Dependencias:</strong> Requiere Fase 1 y Fase 2 completas</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 5%;">#</th>
+                        <th style="width: 25%;">Comando</th>
+                        <th style="width: 15%;">Alcance</th>
+                        <th style="width: 45%;">Descripción y Uso</th>
+                        <th style="width: 10%;">Prioridad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="numero-orden">9</span></td>
+                        <td><span class="comando">generar_derivaciones_tar</span></td>
+                        <td><span class="badge badge-paciente">paciente_paciente</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Genera derivaciones automáticas cuando detecta que un paciente tiene atenciones TAR en diferentes establecimientos de salud.<br><br>
+                                <strong>¿Por qué es importante?</strong> Crea el registro histórico de movimientos de pacientes entre establecimientos.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py generar_derivaciones_tar</code><br><br>
+                                <strong>Impacto:</strong> Crea derivaciones con estado ACEPTADO entre establecimientos diferentes<br>
+                                <strong>Nota:</strong> Solo genera derivaciones si no existe una previa<br>
+                                <strong>Log:</strong> Salida en consola únicamente
+                            </div>
+                        </td>
+                        <td><span class="prioridad prioridad-alta">ALTA</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="numero-orden">10</span></td>
+                        <td><span class="comando">actualiza_derivacion_efectiva</span></td>
+                        <td><span class="badge badge-paciente">paciente_paciente</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Marca derivaciones como efectivas (es_derivacion_efectiva=True) cuando existe un registro TAR posterior en el EESS destino.<br><br>
+                                <strong>¿Por qué es importante?</strong> Valida que las derivaciones se concretaron efectivamente.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py actualiza_derivacion_efectiva</code><br><br>
+                                <strong>Impacto:</strong> Actualiza estado de derivaciones generales con estado ACEPTADO<br>
+                                <strong>Condición:</strong> Busca TAR en EESS destino con fecha >= fecha_aceptacion<br>
+                                <strong>Log:</strong> static/actualiza_derivacion_efectiva_log.txt
+                            </div>
+                        </td>
+                        <td><span class="prioridad prioridad-alta">ALTA</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="numero-orden">11</span></td>
+                        <td><span class="comando">actualiza_derivacion_essalud</span></td>
+                        <td><span class="badge badge-paciente">paciente_paciente</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Marca automáticamente como efectivas las derivaciones hacia establecimientos del sector ESSALUD.<br><br>
+                                <strong>¿Por qué es importante?</strong> ESSALUD es un sistema externo, se asume efectividad automática.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py actualiza_derivacion_essalud</code><br><br>
+                                <strong>Impacto:</strong> Marca derivaciones a ESSALUD como efectivas y cambia estado a ACEPTADO<br>
+                                <strong>Condición:</strong> Solo afecta última derivación por paciente hacia sector ESSALUD<br>
+                                <strong>Log:</strong> static/actualiza_derivacion_essalud.txt
+                            </div>
+                        </td>
+                        <td><span class="prioridad prioridad-alta">ALTA</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="numero-orden">12</span></td>
+                        <td><span class="comando">actualiza_derivacion_internacional</span></td>
+                        <td><span class="badge badge-paciente">paciente_paciente</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Marca como efectivas las derivaciones internacionales salientes (donde el país destino no es Perú).<br><br>
+                                <strong>¿Por qué es importante?</strong> Las derivaciones fuera del país se consideran efectivas automáticamente.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py actualiza_derivacion_internacional</code><br><br>
+                                <strong>Impacto:</strong> Marca derivaciones internacionales como efectivas<br>
+                                <strong>Condición:</strong> es_internacional=True y pais_destino != Perú<br>
+                                <strong>Log:</strong> static/actualiza_derivacion_internacional.txt
+                            </div>
+                        </td>
+                        <td><span class="prioridad prioridad-alta">ALTA</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- FASE 4 -->
+        <div id="fase4" class="fase fase-critica">
+            <h2>🔵 FASE 4: Sincronización Final del Estado de Pacientes (CRÍTICO)</h2>
+            <p><strong>Objetivo:</strong> Sincronizar el estado actual de todos los pacientes según su último TAR y derivaciones.</p>
+            <p><strong>Tiempo estimado:</strong> 30 minutos - 1 hora</p>
+            <p><strong>Dependencias:</strong> Requiere que las Fases 1, 2 y 3 estén completas</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 5%;">#</th>
+                        <th style="width: 25%;">Comando</th>
+                        <th style="width: 15%;">Alcance</th>
+                        <th style="width: 45%;">Descripción y Uso</th>
+                        <th style="width: 10%;">Prioridad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="numero-orden">13</span></td>
+                        <td><span class="comando">actualizar_condicion_eess_pacientes</span></td>
+                        <td><span class="badge badge-paciente">paciente_paciente</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Sincroniza los campos 'establecimiento_salud_actual_id' y 'tipo_condicion_actual_vih_id' según el último TAR o la última derivación efectiva del paciente.<br><br>
+                                <strong>¿Por qué es CRÍTICO?</strong> Es el comando que consolida todo el trabajo anterior y define el estado actual de cada paciente en el sistema.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py actualizar_condicion_eess_pacientes</code><br><br>
+                                <strong>Lógica de actualización:</strong><br>
+                                • Compara fecha del último TAR vs última derivación<br>
+                                • Si derivación es más reciente: usa condición DERIVADO o TRANSFERIDO según estado<br>
+                                • Si TAR es más reciente: usa condición del TAR<br>
+                                • Si condición es FALLECIDO: actualiza también fecha_defuncion<br><br>
+                                <strong>Impacto:</strong> Define el estado actual y EESS actual de TODOS los pacientes<br>
+                                <strong>Dependencia:</strong> DEBE ejecutarse DESPUÉS de todas las correcciones anteriores<br>
+                                <strong>Log:</strong> static/actualizar_condicion_eess_pacientes.txt
+                            </div>
+                        </td>
+                        <td><span class="prioridad prioridad-critica">CRÍTICA</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- FASE 5 -->
+        <div id="fase5" class="fase fase-media">
+            <h2>🟣 FASE 5: Validación de Condiciones Especiales (IMPORTANTE)</h2>
+            <p><strong>Objetivo:</strong> Validar y corregir condiciones especiales como fallecimientos y abandonos.</p>
+            <p><strong>Tiempo estimado:</strong> 2-8 horas (depende de consulta SINADEF)</p>
+            <p><strong>Dependencias:</strong> Requiere Fase 4 completa</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 5%;">#</th>
+                        <th style="width: 25%;">Comando</th>
+                        <th style="width: 15%;">Alcance</th>
+                        <th style="width: 45%;">Descripción y Uso</th>
+                        <th style="width: 10%;">Ejecución</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="numero-orden">14</span></td>
+                        <td><span class="comando">eliminar_fechas_abandono_en_fallecidos</span></td>
+                        <td><span class="badge badge-paciente">paciente_paciente</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Elimina la fecha de abandono del último TAR cuando esta es posterior a la fecha de fallecimiento del paciente.<br><br>
+                                <strong>¿Por qué es importante?</strong> Corrige inconsistencias lógicas (un paciente no puede abandonar después de fallecer).<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py eliminar_fechas_abandono_en_fallecidos</code><br><br>
+                                <strong>Impacto:</strong> Limpia fecha_abandono en TAR de pacientes fallecidos<br>
+                                <strong>Condición:</strong> fecha_abandono > fecha_defuncion<br>
+                                <strong>Log:</strong> static/eliminar_fechas_abandono_en_fallecidos_log.txt
+                            </div>
+                        </td>
+                        <td><span class="badge badge-si">EJECUTAR</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="numero-orden">15</span></td>
+                        <td><span class="comando">set_paciente_sinadef</span></td>
+                        <td><span class="badge badge-paciente">paciente_paciente</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Consulta el servicio SINADEF para verificar si los pacientes están fallecidos y actualiza tipo_condicion_actual_vih_id y fecha_defuncion.<br><br>
+                                <strong>⚠️ ADVERTENCIA:</strong> Puede tomar MUCHO tiempo (consulta externa por cada paciente).<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py set_paciente_sinadef --solo_abandono=1 --cantidad=1000</code><br>
+                                <code>python manage.py set_paciente_sinadef --cantidad=1000</code><br><br>
+                                <strong>Parámetros:</strong><br>
+                                • --solo_abandono=1: Solo consulta pacientes con condición de abandono<br>
+                                • --cantidad: Número máximo de pacientes a consultar<br><br>
+                                <strong>Recomendación:</strong><br>
+                                • Ejecutar en lotes pequeños (500-1000)<br>
+                                • Comenzar con --solo_abandono=1<br>
+                                • Ejecutar fuera de horas pico<br><br>
+                                <strong>Impacto:</strong> Actualiza fallecimientos desde fuente oficial SINADEF<br>
+                                <strong>Log:</strong> static/set_paciente_sinadef_log.txt
+                            </div>
+                        </td>
+                        <td><span class="badge badge-depende">OPCIONAL</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="numero-orden">16</span></td>
+                        <td><span class="comando">validate_check_de_fallecido</span></td>
+                        <td><span class="badge badge-paciente">paciente_paciente</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Establece el campo 'es_fallecido' como False en pacientes que tienen es_fallecido=True pero no tienen fecha_defuncion.<br><br>
+                                <strong>¿Por qué es importante?</strong> Corrige inconsistencias entre el flag es_fallecido y la fecha_defuncion.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py validate_check_de_fallecido</code><br><br>
+                                <strong>Impacto:</strong> Actualiza masivamente es_fallecido=False donde corresponda<br>
+                                <strong>Log:</strong> static/validate_check_de_fallecido_log.txt
+                            </div>
+                        </td>
+                        <td><span class="badge badge-si">EJECUTAR</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="numero-orden">17</span></td>
+                        <td><span class="comando">automatic_abandonment_patient</span></td>
+                        <td><span class="badge badge-paciente">paciente_paciente</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Marca automáticamente como abandonos a pacientes cuya fecha_proxima_cita + días de tolerancia es menor a la fecha actual.<br><br>
+                                <strong>⚠️ ADVERTENCIA:</strong> Revisa la lógica antes de ejecutar. Puede marcar pacientes incorrectamente si los días de tolerancia no están bien configurados.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py automatic_abandonment_patient</code><br><br>
+                                <strong>Lógica:</strong><br>
+                                • Usa variable de entorno DIAS_PROXIMA_CITA_ABANDONO (default: 30)<br>
+                                • Solo afecta pacientes sin condición de Abandono o Fallecido<br>
+                                • No marca como abandono a Derivados o Transferidos<br><br>
+                                <strong>Recomendación:</strong> Ejecutar primero en ambiente de prueba<br>
+                                <strong>Impacto:</strong> Cambia tipo_condicion_actual_vih_id a ABANDONO<br>
+                                <strong>Log:</strong> static/automatic_abandonment_patient_log.txt
+                            </div>
+                        </td>
+                        <td><span class="badge badge-depende">OPCIONAL</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- FASE 6 -->
+        <div id="fase6" class="fase fase-opcional">
+            <h2>⚪ FASE 6: Actualizaciones Complementarias y Calidad de Datos</h2>
+            <p><strong>Objetivo:</strong> Ejecutar comandos adicionales para mejorar la calidad de datos y generar información complementaria.</p>
+            <p><strong>Tiempo estimado:</strong> 1-4 horas (según comandos seleccionados)</p>
+            <p><strong>Dependencias:</strong> Pueden ejecutarse después de Fase 4</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 5%;">#</th>
+                        <th style="width: 25%;">Comando</th>
+                        <th style="width: 15%;">Alcance</th>
+                        <th style="width: 45%;">Descripción y Uso</th>
+                        <th style="width: 10%;">Ejecución</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="numero-orden">18</span></td>
+                        <td><span class="comando">registra_cambio_esquema_tratamiento</span></td>
+                        <td><span class="badge badge-taratencion">taratencion</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Detecta y registra cambios de esquema de tratamiento en la tabla CambioEsquemaTratamiento para pacientes con 2+ atenciones.<br><br>
+                                <strong>¿Cuándo ejecutar?</strong> Si necesitas mantener un historial/auditoría de cambios de esquema.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py registra_cambio_esquema_tratamiento</code><br><br>
+                                <strong>Impacto:</strong> Crea registros de auditoría de cambios de esquema<br>
+                                <strong>Log:</strong> static/registra_cambio_esquema_tratamiento_log.txt
+                            </div>
+                        </td>
+                        <td><span class="badge badge-depende">OPCIONAL</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="numero-orden">19</span></td>
+                        <td><span class="comando">update_tipo_poblacion</span></td>
+                        <td><span class="badge badge-paciente">paciente_paciente</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Actualiza el campo 'tipo_poblacion_id' a 8 (Población General) para pacientes menores o iguales a 12 años.<br><br>
+                                <strong>¿Cuándo ejecutar?</strong> Si necesitas corregir el tipo de población según edad.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py update_tipo_poblacion</code><br><br>
+                                <strong>Impacto:</strong> Actualiza clasificación de población para menores de 12 años<br>
+                                <strong>Log:</strong> static/update_tipo_poblacion_log.txt
+                            </div>
+                        </td>
+                        <td><span class="badge badge-depende">OPCIONAL</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="numero-orden">20</span></td>
+                        <td><span class="comando">validar_diagnosticos</span></td>
+                        <td><span class="badge badge-paciente">paciente_paciente</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Elimina diagnósticos VIH del escenario 1 (PVV con TAR) cuando la fecha_diagnostico no coincide con la fecha de inicio de TAR.<br><br>
+                                <strong>¿Cuándo ejecutar?</strong> Si tienes diagnósticos con fechas incorrectas.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py validar_diagnosticos</code><br><br>
+                                <strong>Impacto:</strong> Elimina registros de diagnostico_vih con fechas inconsistentes<br>
+                                <strong>Log:</strong> static/validar_diagnosticos_log.txt
+                            </div>
+                        </td>
+                        <td><span class="badge badge-depende">OPCIONAL</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="numero-orden">21</span></td>
+                        <td><span class="comando">diagnostico_vih_pacientes</span></td>
+                        <td><span class="badge badge-paciente">paciente_paciente</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Consulta el servicio externo TAMIZAJE_HISMINSA para generar diagnósticos VIH de pacientes sin diagnóstico.<br><br>
+                                <strong>⚠️ REQUISITO:</strong> Servicio TAMIZAJE_HISMINSA debe estar configurado (USERNAME, IP, URL).<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py diagnostico_vih_pacientes --cantidad=1000</code><br><br>
+                                <strong>Parámetros:</strong><br>
+                                • --cantidad: Número máximo de pacientes a consultar (default: 5000)<br><br>
+                                <strong>Impacto:</strong> Genera diagnósticos desde servicio externo HISMINSA<br>
+                                <strong>Log:</strong> static/diagnostico_vih_pacientes_log.txt
+                            </div>
+                        </td>
+                        <td><span class="badge badge-depende">OPCIONAL</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="numero-orden">22</span></td>
+                        <td><span class="comando">actualizar_enfermedad_segun_bd_intermediario</span></td>
+                        <td><span class="badge badge-paciente">paciente_paciente</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Migra información de enfermedad B200 (TB) desde la tabla data_vih.tb_casos de bd_intermediario_vih_tb hacia paciente_enfermedad.<br><br>
+                                <strong>¿Cuándo ejecutar?</strong> Solo si recibes datos de TB desde la base de datos intermediaria.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py actualizar_enfermedad_segun_bd_intermediario</code><br><br>
+                                <strong>⚠️ REQUISITO:</strong> Requiere dblink configurado a 'local_server_intermediario'<br>
+                                <strong>Impacto:</strong> Crea registros de enfermedad B200 para pacientes sin enfermedades<br>
+                                <strong>Log:</strong> static/actualizar_enfermedad_segun_bd_intermediario_log.txt
+                            </div>
+                        </td>
+                        <td><span class="badge badge-depende">OPCIONAL</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="numero-orden">23</span></td>
+                        <td><span class="comando">migrar_enfermedades_a_pacienteenfermedad</span></td>
+                        <td><span class="badge badge-paciente">paciente_paciente</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Migra enfermedades de taratencion_enfermedadtaratencion hacia paciente_enfermedad.<br><br>
+                                <strong>¿Cuándo ejecutar?</strong> Solo si cambias el modelo de enfermedades de TAR a Paciente (migración inversa a comando #7).<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py migrar_enfermedades_a_pacienteenfermedad</code><br><br>
+                                <strong>Impacto:</strong> Migra enfermedades desde tabla TAR a tabla paciente<br>
+                                <strong>Nota:</strong> No crea duplicados<br>
+                                <strong>Log:</strong> static/migrar_enfermedades_a_pacienteenfermedad_log.txt
+                            </div>
+                        </td>
+                        <td><span class="badge badge-depende">OPCIONAL</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="numero-orden">24</span></td>
+                        <td><span class="comando">consulta_netlab_pacientes</span></td>
+                        <td><span class="badge badge-paciente">paciente_paciente</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Consulta el servicio NetLab para obtener y actualizar resultados de laboratorio de pacientes por EESS específicos.<br><br>
+                                <strong>¿Cuándo ejecutar?</strong> Solo si usas el servicio NetLab y necesitas actualizar resultados de laboratorio.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py consulta_netlab_pacientes --cantidad=100 --eess="6000,6104"</code><br><br>
+                                <strong>Parámetros:</strong><br>
+                                • --cantidad: Número de pacientes a consultar (REQUERIDO)<br>
+                                • --eess: Lista de RENIPRES separados por coma (REQUERIDO)<br><br>
+                                <strong>Impacto:</strong> Actualiza resultados de laboratorio desde NetLab<br>
+                                <strong>Log:</strong> static/consulta_netlab_pacientes.txt
+                            </div>
+                        </td>
+                        <td><span class="badge badge-depende">OPCIONAL</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="numero-orden">25</span></td>
+                        <td><span class="comando">migracion_nvih_a_intermediario_vih_tb</span></td>
+                        <td><span class="badge badge-paciente">paciente_paciente</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Exporta datos de NVIH hacia la base de datos intermediaria VIH-TB para generar reportes externos de tuberculosis.<br><br>
+                                <strong>¿Cuándo ejecutar?</strong> Solo si necesitas generar reportes externos para el programa de TB.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py migracion_nvih_a_intermediario_vih_tb</code><br><br>
+                                <strong>⚠️ REQUISITO:</strong> Conexión a bd_intermediario_vih_tb configurada<br>
+                                <strong>Impacto:</strong> Exporta vistas vw_vih_pacientes_tuberculosis y vw_diagnosticados_tptb<br>
+                                <strong>Log:</strong> static/migracion_nvih_a_intermediario_vih_tb_log.txt
+                            </div>
+                        </td>
+                        <td><span class="badge badge-depende">OPCIONAL</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- COMANDOS MANUALES -->
+        <div id="manuales" class="fase fase-opcional">
+            <h2>❌ Comandos MANUALES (Ejecutar SOLO cuando sea necesario)</h2>
+            <p><strong>Advertencia:</strong> Estos comandos solo deben ejecutarse manualmente para casos específicos. NO incluir en scripts automáticos.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 5%;">#</th>
+                        <th style="width: 25%;">Comando</th>
+                        <th style="width: 15%;">Alcance</th>
+                        <th style="width: 55%;">Descripción y Uso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="numero-orden">26</span></td>
+                        <td><span class="comando">cambiar_establecimiento</span></td>
+                        <td><span class="badge badge-paciente">paciente_paciente</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Migra pacientes específicos de un EESS a otro, actualizando establecimiento_salud_id, establecimiento_salud_actual_id en paciente y eess_id en todos sus registros TAR.<br><br>
+                                <strong>⚠️ PELIGRO:</strong> Puede afectar el historial completo del paciente. Solo usar para correcciones puntuales.<br><br>
+                                <strong>¿Cuándo usar?</strong> Solo para casos específicos de migración por error en registro inicial.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py cambiar_establecimiento --eess_inicial=6000 --eess_final=6104 --numdoc="12345678,87654321"</code><br><br>
+                                <strong>Parámetros:</strong><br>
+                                • --eess_inicial: RENIPRES del EESS origen (REQUERIDO)<br>
+                                • --eess_final: RENIPRES del EESS destino (REQUERIDO)<br>
+                                • --numdoc: DNIs separados por coma (REQUERIDO)<br><br>
+                                <strong>Validaciones:</strong><br>
+                                • No migra si el paciente tiene derivaciones registradas<br>
+                                • Valida que el paciente exista en el EESS inicial<br><br>
+                                <strong>Impacto:</strong> Cambia EESS de paciente y TODOS sus TAR<br>
+                                <strong>Log:</strong> static/cambiar_establecimiento_log.txt
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="numero-orden">27</span></td>
+                        <td><span class="comando">derivaciones_masivas</span></td>
+                        <td><span class="badge badge-paciente">paciente_paciente</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Crea derivaciones masivas con estado PENDIENTE para una lista específica de pacientes.<br><br>
+                                <strong>⚠️ PELIGRO:</strong> Puede crear derivaciones duplicadas si no se valida correctamente.<br><br>
+                                <strong>¿Cuándo usar?</strong> Solo para derivaciones masivas planificadas administrativamente.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py derivaciones_masivas --eess_origen=6000 --eess_destino=6104 --pacientes="0172166171,0145922716"</code><br><br>
+                                <strong>Parámetros:</strong><br>
+                                • --eess_origen: RENIPRES del EESS origen (REQUERIDO)<br>
+                                • --eess_destino: RENIPRES del EESS destino (REQUERIDO)<br>
+                                • --pacientes: Lista "tipo_doc+numero_doc" separados por coma (REQUERIDO)<br>
+                                  Ejemplo: "0172166171" = tipo_doc "01" (DNI) + numero "72166171"<br><br>
+                                <strong>Validaciones:</strong><br>
+                                • Paciente debe tener atenciones TAR en EESS origen<br>
+                                • No debe tener derivación pendiente existente<br>
+                                • Establecimientos deben existir y ser diferentes<br><br>
+                                <strong>Impacto:</strong> Crea derivaciones PENDIENTES y cambia tipo_condicion_actual_vih a DERIVADO<br>
+                                <strong>Log:</strong> static/derivaciones_masivas_log.txt
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="numero-orden">28</span></td>
+                        <td><span class="comando">eliminar_paciente</span></td>
+                        <td><span class="badge badge-paciente">paciente_paciente</span></td>
+                        <td>
+                            <div class="command-detail">
+                                <strong>¿Qué hace?</strong> Elimina pacientes específicos y TODOS sus datos relacionados de múltiples tablas del sistema.<br><br>
+                                <strong>⚠️ PELIGRO EXTREMO:</strong> Elimina datos permanentemente. NO SE PUEDE DESHACER.<br><br>
+                                <strong>¿Cuándo usar?</strong> ÚNICAMENTE para eliminar pacientes duplicados o registros erróneos confirmados.<br><br>
+                                <strong>Uso:</strong><br>
+                                <code>python manage.py eliminar_paciente --documento="0145644231,0173822616"</code><br><br>
+                                <strong>Parámetros:</strong><br>
+                                • --documento: Lista "tipo_doc+numero_doc" separados por coma (REQUERIDO)<br>
+                                  Ejemplo: "0145644231" = tipo_doc "01" (DNI) + numero "45644231"<br><br>
+                                <strong>Validaciones de Seguridad:</strong><br>
+                                • NO elimina si el paciente tiene registros en módulo Hepatitis<br>
+                                • NO elimina si el paciente tiene registros en módulo Tamizaje<br>
+                                • En esos casos solo elimina datos TAR y limpia tipo_condicion_actual_vih<br><br>
+                                <strong>Tablas afectadas:</strong><br>
+                                EnfermedadTarAtencion, ExamenTB, CambioEsquemaTratamiento, TarAtencion, Derivacion, VacunaHISMINSA, Vacunas, Sinadef, ResultadoNetLab, DerivacionesXmodulo, DiagnosticoVih, HCE (si no tiene Hep/Tamizaje), Paciente (si no tiene Hep/Tamizaje)<br><br>
+                                <strong>Impacto:</strong> ELIMINACIÓN PERMANENTE de datos<br>
+                                <strong>Log:</strong> static/eliminar_paciente_log.txt
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div id="checklist" class="info-box">
+            <h4>✅ Checklist de Pre-Ejecución</h4>
+            <p><strong>Antes de ejecutar CUALQUIER comando, verifica:</strong></p>
+            <ol style="margin-left: 20px; margin-top: 10px;">
+                <li><strong>Backup de Base de Datos:</strong>
+                    <ul style="margin-left: 20px; margin-top: 5px;">
+                        <li>✓ Backup completo realizado y verificado</li>
+                        <li>✓ Backup almacenado en ubicación segura</li>
+                        <li>✓ Procedimiento de restauración probado</li>
+                    </ul>
+                </li>
+                <li><strong>Ambiente de Ejecución:</strong>
+                    <ul style="margin-left: 20px; margin-top: 5px;">
+                        <li>✓ Ejecutando en ambiente correcto (dev/staging/producción)</li>
+                        <li>✓ Usuario con permisos adecuados</li>
+                        <li>✓ Espacio en disco suficiente para logs</li>
+                    </ul>
+                </li>
+                <li><strong>Horario y Coordinación:</strong>
+                    <ul style="margin-left: 20px; margin-top: 5px;">
+                        <li>✓ Horario de bajo tráfico o mantenimiento programado</li>
+                        <li>✓ Usuarios notificados (si es producción)</li>
+                        <li>✓ Tiempo suficiente para completar la fase</li>
+                    </ul>
+                </li>
+                <li><strong>Dependencias:</strong>
+                    <ul style="margin-left: 20px; margin-top: 5px;">
+                        <li>✓ Fases previas completadas exitosamente</li>
+                        <li>✓ Logs de fases anteriores revisados</li>
+                        <li>✓ Servicios externos disponibles (si aplica)</li>
+                    </ul>
+                </li>
+                <li><strong>Plan de Contingencia:</strong>
+                    <ul style="margin-left: 20px; margin-top: 5px;">
+                        <li>✓ Plan de rollback definido</li>
+                        <li>✓ Contactos de soporte disponibles</li>
+                        <li>✓ Logs monitoreados durante ejecución</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+        
+        <div class="warning-box">
+            <h4>📊 Mapeo de Repositorios</h4>
+            <p><strong>Repositorio paciente_paciente (21 comandos):</strong></p>
+            <ul>
+                <li>actualiza_derivacion_efectiva</li>
+                <li>actualiza_derivacion_essalud</li>
+                <li>actualiza_derivacion_internacional</li>
+                <li>actualiza_eess_origen</li>
+                <li>actualizar_condicion_eess_pacientes</li>
+                <li>actualizar_enfermedad_segun_bd_intermediario</li>
+                <li>automatic_abandonment_patient</li>
+                <li>cambiar_establecimiento</li>
+                <li>consulta_netlab_pacientes</li>
+                <li>derivaciones_masivas</li>
+                <li>diagnostico_vih_pacientes</li>
+                <li>eliminar_fechas_abandono_en_fallecidos</li>
+                <li>eliminar_paciente</li>
+                <li>generar_derivaciones_tar</li>
+                <li>migracion_nvih_a_intermediario_vih_tb</li>
+                <li>migrar_enfermedades_a_pacienteenfermedad</li>
+                <li>set_paciente_sinadef</li>
+                <li>update_tipo_poblacion</li>
+                <li>validar_diagnosticos</li>
+                <li>validate_check_de_fallecido</li>
+            </ul>
+            <br>
+            <p><strong>Repositorio taratencion (8 comandos, 2 deprecados):</strong></p>
+            <ul>
+                <li>actualiza_condicion_tar</li>
+                <li><del style="color: #999;">actualizar_nuevo_continuador</del> <span style="color: #ff6b6b; font-weight: bold;">(⚠️ DEPRECADO - usar update_paciente_continuador_si)</span></li>
+                <li><del style="color: #999;">first_record_tar_to_new</del> <span style="color: #ff6b6b; font-weight: bold;">(⚠️ DEPRECADO - usar update_paciente_continuador_si)</span></li>
+                <li>fix_fecha_esquema_inicial</li>
+                <li>migra_enfermedad_to_tarenfermedad</li>
+                <li>registra_cambio_esquema_tratamiento</li>
+                <li>set_establecimiento_inicial</li>
+                <li>update_paciente_continuador_si</li>
+            </ul>
+        </div>
+        
+        <div class="resumen">
+            <h3>🎯 Recomendaciones Finales</h3>
+            <ul>
+                <li><strong>Orden de Ejecución:</strong> Seguir estrictamente el orden de las fases (1→2→3→4→5→6)</li>
+                <li><strong>Fase 1:</strong> Es CRÍTICA, asegúrate de completarla sin errores antes de continuar</li>
+                <li><strong>Fase 4:</strong> Es el punto de consolidación, debe ejecutarse DESPUÉS de las fases 1-3</li>
+                <li><strong>Comandos en Lotes:</strong> Para comandos con parámetro --cantidad, ejecutar en lotes pequeños</li>
+                <li><strong>SINADEF:</strong> Puede tomar muchas horas, planificar adecuadamente</li>
+                <li><strong>Logs:</strong> SIEMPRE revisar los logs después de cada comando</li>
+                <li><strong>Comandos Manuales:</strong> NUNCA incluir en scripts automáticos</li>
+                <li><strong>Testing:</strong> Ejecutar primero en ambiente de desarrollo/staging</li>
+                <li><strong>Monitoreo:</strong> Monitorear el sistema durante y después de la ejecución</li>
+                <li><strong>Documentación:</strong> Documentar todas las ejecuciones y resultados</li>
+            </ul>
+        </div>
+        
+        <div class="info-box">
+            <h4>📝 Ubicación de Logs</h4>
+            <p>Todos los comandos generan archivos de log en la carpeta <code>static/</code> del proyecto:</p>
+            <ul>
+                <li><code>static/fix_fecha_esquema_inicial.txt</code></li>
+                <li><code>static/set_establecimiento_inicial_pacientes_log.txt</code></li>
+                <li><code>static/actualiza_condicion_tar.txt</code></li>
+                <li><code>static/migra_enfermedad_to_tarenfermedad_log.txt</code></li>
+                <li><code>static/actualiza_eess_origen_log.txt</code></li>
+                <li><code>static/actualiza_derivacion_efectiva_log.txt</code></li>
+                <li><code>static/actualiza_derivacion_essalud.txt</code></li>
+                <li><code>static/actualiza_derivacion_internacional.txt</code></li>
+                <li><code>static/actualizar_condicion_eess_pacientes.txt</code></li>
+                <li><code>static/eliminar_fechas_abandono_en_fallecidos_log.txt</code></li>
+                <li><code>static/set_paciente_sinadef_log.txt</code></li>
+                <li><code>static/validate_check_de_fallecido_log.txt</code></li>
+                <li><code>static/automatic_abandonment_patient_log.txt</code></li>
+                <li><code>static/registra_cambio_esquema_tratamiento_log.txt</code></li>
+                <li><code>static/update_tipo_poblacion_log.txt</code></li>
+                <li><code>static/validar_diagnosticos_log.txt</code></li>
+                <li><code>static/diagnostico_vih_pacientes_log.txt</code></li>
+                <li><code>static/actualizar_enfermedad_segun_bd_intermediario_log.txt</code></li>
+                <li><code>static/migrar_enfermedades_a_pacienteenfermedad_log.txt</code></li>
+                <li><code>static/consulta_netlab_pacientes.txt</code></li>
+                <li><code>static/migracion_nvih_a_intermediario_vih_tb_log.txt</code></li>
+                <li><code>static/cambiar_establecimiento_log.txt</code></li>
+                <li><code>static/derivaciones_masivas_log.txt</code></li>
+                <li><code>static/eliminar_paciente_log.txt</code></li>
+            </ul>
+            <p style="margin-top: 10px;"><strong>Importante:</strong> Revisar estos logs después de cada ejecución para identificar errores o registros no procesados.</p>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+            <h3 style="color: #2c3e50; margin-bottom: 10px;">📋 Documento Generado</h3>
+            <p style="color: #7f8c8d;">Comandos del Sistema NVIH - Organizados por Fases de Ejecución</p>
+            <p style="color: #7f8c8d; font-size: 0.9em; margin-top: 10px;">
+                Total: 28 comandos | 6 fases de ejecución | 3 comandos manuales
+            </p>
+            <p style="color: #7f8c8d; font-size: 0.85em; margin-top: 15px;">
+                Versión: 1.0 | Fecha: Noviembre 2025
+            </p>
+        </div>
+        
     </div>
-  </body>
+</body>
 </html>
